@@ -5,7 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Search,
-  Filter
+  Filter,
+  Truck,
+  Shield,
+  RotateCcw,
+  Headphones,
+  ShieldCheck,
+  Timer,
+  Tag
 } from "lucide-react";
 
 // Mock product data
@@ -202,15 +209,75 @@ export default function Index() {
       />
 
       {/* About Section */}
-      <section className="py-12">
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-4">About EliteStore</h2>
-          <p className="text-muted-foreground max-w-3xl">
-            EliteStore is a modern e-commerce storefront built to showcase trending items, new arrivals, and
-            customer favorites all on a single homepage. Built with performance and usability in mind, the site
-            includes search, filters, and a persistent cart modal for a smooth shopping experience. This demo
-            uses mock data but is ready to integrate with a backend for products, authentication, and orders.
-          </p>
+          <div className="relative overflow-hidden rounded-2xl border bg-card p-8 md:p-12">
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-blue-500" />
+            <div className="grid md:grid-cols-2 gap-8 items-center relative">
+              <div>
+                <h2 className="text-3xl font-bold mb-3">About EliteStore</h2>
+                <p className="text-muted-foreground mb-6">
+                  EliteStore brings together trending items, new arrivals, and customer favorites in a clean, fast shopping experience.
+                  Enjoy powerful search, filters, and a persistent cart modal — all designed for seamless browsing.
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3">
+                    <ShieldCheck className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Secure checkout and protected data</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Timer className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Fast performance and quick browsing</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Tag className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Exclusive deals and seasonal offers</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="aspect-square rounded-xl bg-muted" />
+                <div className="aspect-square rounded-xl bg-muted" />
+                <div className="col-span-2 h-24 rounded-xl bg-gradient-to-r from-primary/20 via-purple-500/20 to-blue-500/20" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Info at Bottom */}
+      <section className="py-12 border-t">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="flex items-center gap-3 p-4 rounded-xl border bg-card">
+              <Truck className="h-6 w-6 text-primary" />
+              <div>
+                <h3 className="font-semibold text-sm">Free Shipping</h3>
+                <p className="text-xs text-muted-foreground">On orders over $50</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-4 rounded-xl border bg-card">
+              <Shield className="h-6 w-6 text-primary" />
+              <div>
+                <h3 className="font-semibold text-sm">Secure Payment</h3>
+                <p className="text-xs text-muted-foreground">100% secure checkout</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-4 rounded-xl border bg-card">
+              <RotateCcw className="h-6 w-6 text-primary" />
+              <div>
+                <h3 className="font-semibold text-sm">Easy Returns</h3>
+                <p className="text-xs text-muted-foreground">30-day return policy</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 p-4 rounded-xl border bg-card">
+              <Headphones className="h-6 w-6 text-primary" />
+              <div>
+                <h3 className="font-semibold text-sm">24/7 Support</h3>
+                <p className="text-xs text-muted-foreground">Always here to help</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
