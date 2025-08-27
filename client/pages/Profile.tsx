@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/context/AuthContext";
+import AdminModal from "@/components/AdminModal";
 
 export default function Profile() {
   const { user, signOut } = useAuth();
