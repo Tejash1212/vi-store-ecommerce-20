@@ -10,13 +10,54 @@ import { Search, User, Heart, Menu, X } from "lucide-react";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [hidden, setHidden] = useState(false);
 
   const { cart, wishlist } = useCart();
   const cartItemCount = cart.reduce((s, i) => s + i.quantity, 0);
   const wishlistCount = wishlist.length;
 
+  // Track scroll direction to hide header on scroll down and show on scroll up
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    lastScrollY.current = window.scrollY || 0;
+    const threshold = 10;
+
+    const update = () => {
+      const current = window.scrollY || 0;
+      const diff = current - lastScrollY.current;
+
+      if (Math.abs(diff) < threshold) {
+        ticking.current = false;
+        return;
+      }
+
+      if (diff > 0 && current > 100) {
+        // scrolling down
+        setHidden(true);
+      } else if (diff < 0) {
+        // scrolling up
+        setHidden(false);
+      }
+
+      lastScrollY.current = current;
+      ticking.current = false;
+    };
+
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll as any);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 shadow-md">
+    <header className={`sticky top-0 z-50 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 shadow-md transform transition-transform duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"}`}>
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
