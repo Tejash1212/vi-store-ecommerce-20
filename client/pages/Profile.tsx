@@ -55,12 +55,8 @@ export default function Profile() {
                         <h5 className="font-semibold">Product Management</h5>
                         <p className="text-sm text-muted-foreground mb-3">Add, edit or remove products from the catalog.</p>
                         <div className="flex gap-2">
-                          <AdminModal triggerLabel="Add Product" title="Add Product">
-                            <p className="text-sm text-muted-foreground">Form to add a new product will appear here.</p>
-                          </AdminModal>
-                          <AdminModal triggerLabel="Edit Products" title="Edit Products" variant="outline">
-                            <p className="text-sm text-muted-foreground">Product list and edit controls will appear here.</p>
-                          </AdminModal>
+                          <AddProductModal />
+                          <ManageProductsModal />
                         </div>
                       </div>
 
