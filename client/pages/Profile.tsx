@@ -78,7 +78,9 @@ export default function Profile() {
                         <h5 className="font-semibold">Analytics</h5>
                         <p className="text-sm text-muted-foreground mb-3">View sales, top products, and user engagement.</p>
                         <div className="flex gap-2">
-                          <Button size="sm">View Dashboard</Button>
+                          <AdminModal triggerLabel="View Dashboard" title="Analytics">
+                            <p className="text-sm text-muted-foreground">Charts and metrics will appear here.</p>
+                          </AdminModal>
                         </div>
                       </div>
 
