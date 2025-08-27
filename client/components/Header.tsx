@@ -101,7 +101,14 @@ export default function Header() {
 
           {/* Search Bar */}
           <div className="hidden md:flex items-center flex-1 max-w-lg mx-8">
-            <div className="relative w-full">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const q = searchQuery.trim();
+                navigate(q ? `/?q=${encodeURIComponent(q)}` : "/");
+              }}
+              className="relative w-full"
+            >
               <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/70" />
               <Input
                 placeholder="Search products..."
@@ -109,7 +116,7 @@ export default function Header() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 pr-4 rounded-full bg-white/5 text-white placeholder:text-white/60 shadow-sm border border-white/10"
               />
-            </div>
+            </form>
           </div>
 
           {/* Actions */}
