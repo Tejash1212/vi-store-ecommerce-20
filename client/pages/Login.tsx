@@ -13,8 +13,15 @@ import {
 import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
-  const { signIn, signUp, resetPassword, signInWithGoogle, user } = useAuth();
+  const { signIn, signUp, resetPassword, signInWithGoogle, user, loading } = useAuth();
   const navigate = useNavigate();
+
+  // If the user is already authenticated, redirect away from the login page
+  useEffect(() => {
+    if (!loading && user) {
+      navigate("/profile");
+    }
+  }, [user, loading, navigate]);
 
   const [mode, setMode] = useState<"login" | "signup" | "reset">("login");
   const [email, setEmail] = useState("");
