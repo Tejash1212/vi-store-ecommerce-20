@@ -124,26 +124,20 @@ export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
 
-  // Filter products by category and search
-  const trendingProducts = mockProducts.filter((p) => p.isTrending).slice(0, 4);
-  const newProducts = mockProducts.filter((p) => p.isNew).slice(0, 4);
-  const mostBoughtProducts = mockProducts.slice(0, 4); // Simulate most bought
+  // Helper: base filter by category and search
+  const baseFiltered = mockProducts.filter((p) =>
+    (selectedCategory === "All" || p.category === selectedCategory) &&
+    (searchQuery.trim() === "" || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
 
-  const filteredAll = mockProducts
-    .filter((p) =>
-      (selectedCategory === "All" || p.category === selectedCategory) &&
-      (searchQuery.trim() === "" || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    )
-    .sort((a, b) => {
-      // Price sorts
-      if (sortBy === "price-low") return a.price - b.price;
-      if (sortBy === "price-high") return b.price - a.price;
-
-      // Popularity (by number of reviews)
-      if (sortBy === "popularity") return (b.reviewCount || 0) - (a.reviewCount || 0);
-
-      // Newest: prefer items marked as "isNew" then fallback to numeric id if available
-      if (sortBy === "newest") {
+  // Reusable sorter so the selected sort applies across all sections
+  const sortProducts = (items: typeof mockProducts, sort: string) => {
+    const copy = [...items];
+    copy.sort((a, b) => {
+      if (sort === "price-low") return a.price - b.price;
+      if (sort === "price-high") return b.price - a.price;
+      if (sort === "popularity") return (b.reviewCount || 0) - (a.reviewCount || 0);
+      if (sort === "newest") {
         const aNew = a.isNew ? 1 : 0;
         const bNew = b.isNew ? 1 : 0;
         if (aNew !== bNew) return bNew - aNew;
@@ -152,10 +146,18 @@ export default function Index() {
         if (!isNaN(aId) && !isNaN(bId)) return bId - aId;
         return 0;
       }
-
-      // Featured or unknown sort: keep original order
+      // featured or unknown -> keep original order
       return 0;
     });
+    return copy;
+  };
+
+  // Apply category/search filter then sort for each section
+  const trendingProducts = sortProducts(baseFiltered.filter((p) => p.isTrending), sortBy).slice(0, 4);
+  const newProducts = sortProducts(baseFiltered.filter((p) => p.isNew), sortBy).slice(0, 4);
+  const mostBoughtProducts = sortProducts(baseFiltered, sortBy).slice(0, 4); // top items after sorting
+
+  const filteredAll = sortProducts(baseFiltered, sortBy);
 
   const categories = [
     "All",
