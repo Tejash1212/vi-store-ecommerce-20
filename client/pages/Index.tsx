@@ -126,14 +126,33 @@ export default function Index() {
   const [sortBy, setSortBy] = useState("featured");
   const [products, setProducts] = useState<any[]>([]);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // Sync searchQuery with URL param 'q'
-  const { search } = window.location ? window.location : { search: "" };
   useEffect(() => {
-    const params = new URLSearchParams(search);
+    const params = new URLSearchParams(location.search);
     const q = params.get("q") || "";
     setSearchQuery(q);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search]);
+  }, [location.search]);
+
+  // When user types in the page search, update the URL debounced so header and other components stay in sync
+  const searchDebounceRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (searchDebounceRef.current) window.clearTimeout(searchDebounceRef.current);
+    searchDebounceRef.current = window.setTimeout(() => {
+      const params = new URLSearchParams(location.search);
+      const current = params.get("q") || "";
+      if (searchQuery !== current) {
+        if (searchQuery) navigate(`/?q=${encodeURIComponent(searchQuery)}`, { replace: true });
+        else navigate(`/`, { replace: true });
+      }
+    }, 300);
+    return () => {
+      if (searchDebounceRef.current) window.clearTimeout(searchDebounceRef.current);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
 
   // Subscribe to products collection in Firestore. Fall back to mockProducts while loading.
   useEffect(() => {
