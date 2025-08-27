@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import ProductGrid from "@/components/ProductGrid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import {
   Search,
   Filter
