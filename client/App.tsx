@@ -36,4 +36,11 @@ const App = () => (
   </QueryClientProvider>
 );
 
-createRoot(document.getElementById("root")!).render(<App />);
+const rootElement = document.getElementById("root")!;
+// Guard against double createRoot during HMR or re-runs
+let rootInstance: any = (rootElement as any).__rootInstance;
+if (!rootInstance) {
+  rootInstance = createRoot(rootElement);
+  (rootElement as any).__rootInstance = rootInstance;
+}
+rootInstance.render(<App />);
