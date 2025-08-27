@@ -215,9 +215,9 @@ export default function Index() {
             <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-blue-500" />
             <div className="grid md:grid-cols-2 gap-8 items-center relative">
               <div>
-                <h2 className="text-3xl font-bold mb-3">About EliteStore</h2>
+                <h2 className="text-3xl font-bold mb-3">About VI Store</h2>
                 <p className="text-muted-foreground mb-6">
-                  EliteStore brings together trending items, new arrivals, and customer favorites in a clean, fast shopping experience.
+                  VI Store brings together trending items, new arrivals, and customer favorites in a clean, fast shopping experience.
                   Enjoy powerful search, filters, and a persistent cart modal — all designed for seamless browsing.
                 </p>
                 <ul className="space-y-3">
