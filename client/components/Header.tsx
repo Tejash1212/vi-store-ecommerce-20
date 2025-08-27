@@ -16,6 +16,16 @@ export default function Header() {
   const cartItemCount = cart.reduce((s, i) => s + i.quantity, 0);
   const wishlistCount = wishlist.length;
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Keep header search in sync with URL query param 'q'
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get("q") || "";
+    setSearchQuery(q);
+  }, [location.search]);
+
   // Track scroll direction to hide header on scroll down and show on scroll up
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
