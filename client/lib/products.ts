@@ -55,7 +55,10 @@ export async function getAllProducts() {
 export function onProductsSnapshot(callback: (products: Product[]) => void) {
   const q = query(productsCollection, orderBy("createdAt", "desc"));
   return onSnapshot(q, (snapshot) => {
-    const products = snapshot.docs.map((d) => ({ id: d.id, ...(d.data() as Product) }));
+    const products = snapshot.docs.map((d) => ({
+      id: d.id,
+      ...(d.data() as Product),
+    }));
     callback(products);
   });
 }

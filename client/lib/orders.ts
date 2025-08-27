@@ -1,4 +1,12 @@
-import { collection, getDocs, onSnapshot, doc, updateDoc, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  doc,
+  updateDoc,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { db } from "./firebase";
 
 export type Order = {
@@ -21,7 +29,10 @@ export async function getAllOrders() {
 export function onOrdersSnapshot(callback: (orders: Order[]) => void) {
   const q = query(ordersCollection, orderBy("createdAt", "desc"));
   return onSnapshot(q, (snapshot) => {
-    const orders = snapshot.docs.map((d) => ({ id: d.id, ...(d.data() as Order) }));
+    const orders = snapshot.docs.map((d) => ({
+      id: d.id,
+      ...(d.data() as Order),
+    }));
     callback(orders);
   });
 }

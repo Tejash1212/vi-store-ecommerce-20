@@ -38,7 +38,10 @@ export default function AnalyticsModal() {
           </div>
         </div>
         <div>
-          <p className="text-sm text-muted-foreground">Basic analytics summary. Connect to external analytics for more insights.</p>
+          <p className="text-sm text-muted-foreground">
+            Basic analytics summary. Connect to external analytics for more
+            insights.
+          </p>
         </div>
       </div>
     </AdminModal>

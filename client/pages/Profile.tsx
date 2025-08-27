@@ -50,13 +50,16 @@ export default function Profile() {
                   <div className="mt-6">
                     <h4 className="font-semibold">Admin Dashboard</h4>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Manage products, orders and view analytics. These admin tools are available to all users in this demo.
+                      Manage products, orders and view analytics. These admin
+                      tools are available to all users in this demo.
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div className="p-4 rounded-lg border bg-card">
                         <h5 className="font-semibold">Product Management</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Add, edit or remove products from the catalog.</p>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Add, edit or remove products from the catalog.
+                        </p>
                         <div className="flex gap-2">
                           <AddProductModal />
                           <ManageProductsModal />
@@ -65,18 +68,29 @@ export default function Profile() {
 
                       <div className="p-4 rounded-lg border bg-card">
                         <h5 className="font-semibold">Orders</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Manage and update order statuses.</p>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Manage and update order statuses.
+                        </p>
                         <div className="flex gap-2">
                           <OrdersModal />
-                          <AdminModal triggerLabel="Manage Returns" title="Manage Returns" variant="outline">
-                            <p className="text-sm text-muted-foreground">Return requests and processing tools will appear here.</p>
+                          <AdminModal
+                            triggerLabel="Manage Returns"
+                            title="Manage Returns"
+                            variant="outline"
+                          >
+                            <p className="text-sm text-muted-foreground">
+                              Return requests and processing tools will appear
+                              here.
+                            </p>
                           </AdminModal>
                         </div>
                       </div>
 
                       <div className="p-4 rounded-lg border bg-card">
                         <h5 className="font-semibold">Analytics</h5>
-                        <p className="text-sm text-muted-foreground mb-3">View sales, top products, and user engagement.</p>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          View sales, top products, and user engagement.
+                        </p>
                         <div className="flex gap-2">
                           <AnalyticsModal />
                         </div>
@@ -84,7 +98,9 @@ export default function Profile() {
 
                       <div className="p-4 rounded-lg border bg-card">
                         <h5 className="font-semibold">Settings</h5>
-                        <p className="text-sm text-muted-foreground mb-3">Configure store settings, coupons and shipping.</p>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Configure store settings, coupons and shipping.
+                        </p>
                         <div className="flex gap-2">
                           <SettingsModal />
                         </div>
