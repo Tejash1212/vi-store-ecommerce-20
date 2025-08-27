@@ -4,15 +4,9 @@ import ProductGrid from "@/components/ProductGrid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { 
-  Search, 
-  Filter, 
-  ArrowRight,
-  Truck,
-  Shield,
-  RotateCcw,
-  Headphones
+import {
+  Search,
+  Filter
 } from "lucide-react";
 
 // Mock product data
@@ -127,65 +121,6 @@ export default function Index() {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-purple-600 to-blue-600 text-white">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-              Discover Amazing Products
-            </h1>
-            <p className="text-lg md:text-xl mb-8 text-white/90">
-              Shop the latest trends, best deals, and premium quality products all in one place.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-white text-purple-600 hover:bg-white/90">
-                Shop Now
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
-                Explore Categories
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-8 border-b">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex items-center gap-3 p-4">
-              <Truck className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold text-sm">Free Shipping</h3>
-                <p className="text-xs text-muted-foreground">On orders over $50</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-4">
-              <Shield className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold text-sm">Secure Payment</h3>
-                <p className="text-xs text-muted-foreground">100% secure checkout</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-4">
-              <RotateCcw className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold text-sm">Easy Returns</h3>
-                <p className="text-xs text-muted-foreground">30-day return policy</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-4">
-              <Headphones className="h-8 w-8 text-primary" />
-              <div>
-                <h3 className="font-semibold text-sm">24/7 Support</h3>
-                <p className="text-xs text-muted-foreground">Always here to help</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Filters & Search Section */}
       <section className="py-6 bg-muted/30">
         <div className="container mx-auto px-4">
@@ -255,74 +190,6 @@ export default function Index() {
         subtitle="Customer favorites"
       />
 
-      {/* Newsletter Section */}
-      <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay in the Loop</h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            Subscribe to our newsletter for exclusive deals, new product updates, and special offers.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input
-              placeholder="Enter your email"
-              type="email"
-              className="flex-1"
-            />
-            <Button>
-              Subscribe
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-card border-t py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">E</span>
-                </div>
-                <span className="font-bold text-xl">EliteStore</span>
-              </div>
-              <p className="text-muted-foreground text-sm">
-                Your one-stop shop for quality products at unbeatable prices.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Quick Links</h3>
-              <div className="space-y-2 text-sm">
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">About Us</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Contact</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">FAQ</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Shipping</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Categories</h3>
-              <div className="space-y-2 text-sm">
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Electronics</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Fashion</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Gaming</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Kitchen</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Support</h3>
-              <div className="space-y-2 text-sm">
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Returns</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Privacy Policy</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Terms of Service</p>
-                <p className="text-muted-foreground hover:text-foreground cursor-pointer">Help Center</p>
-              </div>
-            </div>
-          </div>
-          <div className="border-t pt-8 mt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 EliteStore. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
