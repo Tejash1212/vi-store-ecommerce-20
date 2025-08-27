@@ -81,7 +81,18 @@ export default function Login() {
       setMessage("Signed in with Google");
       navigate("/profile");
     } catch (err: any) {
-      setError(err?.message || "Google sign-in failed");
+      let errorMessage = err?.message || "Google sign-in failed";
+
+      // Provide helpful guidance for common Firebase auth errors
+      if (err?.code === "auth/unauthorized-domain") {
+        errorMessage = "Google Sign-In is not enabled for this domain. Please use email/password sign-in or contact support.";
+      } else if (err?.code === "auth/popup-blocked") {
+        errorMessage = "Pop-up was blocked. Please allow pop-ups and try again.";
+      } else if (err?.code === "auth/popup-closed-by-user") {
+        errorMessage = "Sign-in was cancelled. Please try again.";
+      }
+
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
