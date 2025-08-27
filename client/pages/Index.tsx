@@ -123,9 +123,24 @@ export default function Index() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
+  const [products, setProducts] = useState<any[]>([]);
+
+  // Subscribe to products collection in Firestore. Fall back to mockProducts while loading.
+  useEffect(() => {
+    let unsub: (() => void) | undefined;
+    try {
+      const { onProductsSnapshot } = require("@/lib/products");
+      unsub = onProductsSnapshot((items: any[]) => setProducts(items || []));
+    } catch (err) {
+      console.warn("Could not subscribe to products snapshot:", err);
+    }
+    return () => unsub && unsub();
+  }, []);
+
+  const sourceProducts = products.length ? products : mockProducts;
 
   // Helper: base filter by category and search
-  const baseFiltered = mockProducts.filter((p) =>
+  const baseFiltered = sourceProducts.filter((p) =>
     (selectedCategory === "All" || p.category === selectedCategory) &&
     (searchQuery.trim() === "" || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
   );
