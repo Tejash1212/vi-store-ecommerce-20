@@ -165,8 +165,8 @@ export default function Login() {
                 {message && <p className="text-sm text-primary">{message}</p>}
 
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <Button type="submit" className="flex-1" disabled={loading}>
-                    {loading
+                  <Button type="submit" className="flex-1" disabled={submitting || loading}>
+                    {submitting || loading
                       ? "Please wait..."
                       : mode === "login"
                         ? "Sign In"
