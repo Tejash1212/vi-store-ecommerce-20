@@ -124,10 +124,22 @@ export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
 
-  // Filter products by category
+  // Filter products by category and search
   const trendingProducts = mockProducts.filter((p) => p.isTrending).slice(0, 4);
   const newProducts = mockProducts.filter((p) => p.isNew).slice(0, 4);
   const mostBoughtProducts = mockProducts.slice(0, 4); // Simulate most bought
+
+  const filteredAll = mockProducts
+    .filter((p) =>
+      (selectedCategory === "All" || p.category === selectedCategory) &&
+      (searchQuery.trim() === "" || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    )
+    .sort((a, b) => {
+      if (sortBy === "price-low") return a.price - b.price;
+      if (sortBy === "price-high") return b.price - a.price;
+      if (sortBy === "newest") return (b as any).createdAt - (a as any).createdAt;
+      return 0;
+    });
 
   const categories = [
     "All",
