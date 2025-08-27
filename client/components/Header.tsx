@@ -22,9 +22,20 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="h-8 w-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">
-                VI
-              </span>
+              <p style={{ margin: 0 }}>
+                <strong style={{ color: "rgb(252, 251, 251)" }}>
+                  <em>
+                    <u>VI</u>
+                  </em>
+                </strong>
+                <strong style={{ color: "rgb(252, 251, 251)", backgroundColor: "rgb(80, 227, 194)" }}>
+                  <em>
+                    <u>
+                      <span className="ql-cursor">{"\uFEFF"}</span>
+                    </u>
+                  </em>
+                </strong>
+              </p>
             </div>
             <span className="font-bold text-xl">VI Store</span>
           </Link>
