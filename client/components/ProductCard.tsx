@@ -2,12 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Heart, 
-  ShoppingCart, 
-  Star,
-  Eye
-} from "lucide-react";
+import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
 
 interface Product {
   id: string;
@@ -36,7 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     e.preventDefault(); // Prevent link navigation
     setIsLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     setIsLoading(false);
     // Add to cart logic here
   };
@@ -46,8 +41,10 @@ export default function ProductCard({ product }: ProductCardProps) {
     setIsWishlisted(!isWishlisted);
   };
 
-  const discountPercentage = product.originalPrice 
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+  const discountPercentage = product.originalPrice
+    ? Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100,
+      )
     : 0;
 
   return (
@@ -60,17 +57,21 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt={product.name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          
+
           {/* Badges */}
           <div className="absolute top-2 left-2 flex flex-col gap-1">
             {product.isNew && (
               <Badge className="bg-green-500 hover:bg-green-600">New</Badge>
             )}
             {product.isTrending && (
-              <Badge className="bg-orange-500 hover:bg-orange-600">Trending</Badge>
+              <Badge className="bg-orange-500 hover:bg-orange-600">
+                Trending
+              </Badge>
             )}
             {discountPercentage > 0 && (
-              <Badge className="bg-red-500 hover:bg-red-600">-{discountPercentage}%</Badge>
+              <Badge className="bg-red-500 hover:bg-red-600">
+                -{discountPercentage}%
+              </Badge>
             )}
           </div>
 
@@ -82,15 +83,11 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="h-8 w-8"
               onClick={handleToggleWishlist}
             >
-              <Heart 
-                className={`h-4 w-4 ${isWishlisted ? 'fill-current text-red-500' : ''}`} 
+              <Heart
+                className={`h-4 w-4 ${isWishlisted ? "fill-current text-red-500" : ""}`}
               />
             </Button>
-            <Button
-              size="icon"
-              variant="secondary"
-              className="h-8 w-8"
-            >
+            <Button size="icon" variant="secondary" className="h-8 w-8">
               <Eye className="h-4 w-4" />
             </Button>
           </div>
@@ -98,7 +95,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           {/* Out of Stock Overlay */}
           {!product.inStock && (
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-              <Badge variant="destructive" className="text-sm">Out of Stock</Badge>
+              <Badge variant="destructive" className="text-sm">
+                Out of Stock
+              </Badge>
             </div>
           )}
         </div>
@@ -124,8 +123,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                     key={i}
                     className={`h-3 w-3 ${
                       i < Math.floor(product.rating)
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
+                        ? "fill-yellow-400 text-yellow-400"
+                        : "text-gray-300"
                     }`}
                   />
                 ))}
@@ -160,7 +159,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               ) : (
                 <div className="flex items-center gap-2">
                   <ShoppingCart className="h-4 w-4" />
-                  {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                  {product.inStock ? "Add to Cart" : "Out of Stock"}
                 </div>
               )}
             </Button>

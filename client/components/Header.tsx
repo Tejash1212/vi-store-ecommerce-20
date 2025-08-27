@@ -4,13 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import CartModal from "./CartModal";
-import {
-  Search,
-  User,
-  Heart,
-  Menu,
-  X
-} from "lucide-react";
+import { Search, User, Heart, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,20 +20,31 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="h-8 w-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">VI</span>
+              <span className="text-primary-foreground font-bold text-sm">
+                VI
+              </span>
             </div>
             <span className="font-bold text-xl">VI Store</span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              to="/"
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               Home
             </Link>
-            <Link to="/login" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              to="/login"
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               Login
             </Link>
-            <Link to="/profile" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              to="/profile"
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               Profile
             </Link>
           </nav>
@@ -86,7 +91,11 @@ export default function Header() {
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>

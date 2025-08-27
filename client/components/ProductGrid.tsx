@@ -23,18 +23,18 @@ interface ProductGridProps {
   columns?: 2 | 3 | 4 | 5;
 }
 
-export default function ProductGrid({ 
-  products, 
-  title, 
-  subtitle, 
+export default function ProductGrid({
+  products,
+  title,
+  subtitle,
   showViewAll = true,
-  columns = 4 
+  columns = 4,
 }: ProductGridProps) {
   const gridCols = {
     2: "grid-cols-2",
     3: "grid-cols-2 md:grid-cols-3",
     4: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
-    5: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+    5: "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
   };
 
   return (
@@ -47,12 +47,10 @@ export default function ProductGrid({
               {title}
             </h2>
             {subtitle && (
-              <p className="text-muted-foreground mt-1">
-                {subtitle}
-              </p>
+              <p className="text-muted-foreground mt-1">{subtitle}</p>
             )}
           </div>
-          
+
           {showViewAll && (
             <button className="text-primary hover:text-primary/80 font-medium text-sm transition-colors">
               View All →

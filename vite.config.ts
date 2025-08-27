@@ -30,9 +30,9 @@ export default defineConfig(({ mode }) => ({
       "firebase/auth",
       "firebase/firestore",
       "firebase/storage",
-      "firebase/analytics"
-    ]
-  }
+      "firebase/analytics",
+    ],
+  },
 }));
 
 function expressPlugin(): Plugin {

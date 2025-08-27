@@ -95,22 +95,52 @@ export default function Login() {
           <Card>
             <CardHeader className="text-center">
               <CardTitle className="text-2xl">
-                {mode === "login" ? "Sign in to VI Store" : mode === "signup" ? "Create an account" : "Reset password"}
+                {mode === "login"
+                  ? "Sign in to VI Store"
+                  : mode === "signup"
+                    ? "Create an account"
+                    : "Reset password"}
               </CardTitle>
               <CardDescription>
                 {mode === "login" && "Welcome back — sign in to continue"}
                 {mode === "signup" && "Create your VI Store account"}
-                {mode === "reset" && "Enter your email to receive password reset instructions"}
+                {mode === "reset" &&
+                  "Enter your email to receive password reset instructions"}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={mode === "login" ? handleLogin : mode === "signup" ? handleSignup : handleReset} className="space-y-4">
+              <form
+                onSubmit={
+                  mode === "login"
+                    ? handleLogin
+                    : mode === "signup"
+                      ? handleSignup
+                      : handleReset
+                }
+                className="space-y-4"
+              >
                 {mode === "signup" && (
-                  <Input placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} />
+                  <Input
+                    placeholder="Full name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 )}
-                <Input placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                <Input
+                  placeholder="Email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
                 {mode !== "reset" && (
-                  <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                  <Input
+                    placeholder="Password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
                 )}
 
                 {error && <p className="text-sm text-destructive">{error}</p>}
@@ -118,10 +148,21 @@ export default function Login() {
 
                 <div className="flex flex-col sm:flex-row gap-2">
                   <Button type="submit" className="flex-1" disabled={loading}>
-                    {loading ? "Please wait..." : mode === "login" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Email"}
+                    {loading
+                      ? "Please wait..."
+                      : mode === "login"
+                        ? "Sign In"
+                        : mode === "signup"
+                          ? "Create Account"
+                          : "Send Reset Email"}
                   </Button>
                   {mode !== "reset" && (
-                    <Button type="button" variant="outline" onClick={handleGoogle} disabled={loading}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleGoogle}
+                      disabled={loading}
+                    >
                       Continue with Google
                     </Button>
                   )}
@@ -132,7 +173,12 @@ export default function Login() {
                 <div>
                   {mode === "login" ? (
                     <>
-                      <button className="underline" onClick={() => setMode("reset")}>Forgot password?</button>
+                      <button
+                        className="underline"
+                        onClick={() => setMode("reset")}
+                      >
+                        Forgot password?
+                      </button>
                     </>
                   ) : (
                     <></>
@@ -141,17 +187,35 @@ export default function Login() {
                 <div>
                   {mode === "login" && (
                     <p>
-                      New here? <button className="underline" onClick={() => setMode("signup")}>Create an account</button>
+                      New here?{" "}
+                      <button
+                        className="underline"
+                        onClick={() => setMode("signup")}
+                      >
+                        Create an account
+                      </button>
                     </p>
                   )}
                   {mode === "signup" && (
                     <p>
-                      Already have an account? <button className="underline" onClick={() => setMode("login")}>Sign in</button>
+                      Already have an account?{" "}
+                      <button
+                        className="underline"
+                        onClick={() => setMode("login")}
+                      >
+                        Sign in
+                      </button>
                     </p>
                   )}
                   {mode === "reset" && (
                     <p>
-                      Remembered? <button className="underline" onClick={() => setMode("login")}>Sign in</button>
+                      Remembered?{" "}
+                      <button
+                        className="underline"
+                        onClick={() => setMode("login")}
+                      >
+                        Sign in
+                      </button>
                     </p>
                   )}
                 </div>

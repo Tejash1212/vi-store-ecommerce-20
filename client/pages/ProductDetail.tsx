@@ -1,6 +1,12 @@
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function ProductDetail() {
   return (
@@ -16,9 +22,7 @@ export default function ProductDetail() {
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center space-y-4">
-              <p className="text-muted-foreground">
-                This page will include:
-              </p>
+              <p className="text-muted-foreground">This page will include:</p>
               <ul className="text-left space-y-2 text-sm text-muted-foreground">
                 <li>• Product image gallery</li>
                 <li>• Detailed descriptions</li>
