@@ -10,14 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ShoppingCart, Plus, Minus, Trash2, ArrowRight } from "lucide-react";
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import { useCart } from "@/context/CartContext";
 
 interface CartModalProps {
   cartItemCount: number;
@@ -26,46 +19,7 @@ interface CartModalProps {
 export default function CartModal({ cartItemCount }: CartModalProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Mock cart items - this will come from cart state later
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: "1",
-      name: "Wireless Bluetooth Headphones",
-      price: 99.99,
-      quantity: 1,
-      image:
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=80&h=80&fit=crop&crop=center",
-    },
-    {
-      id: "2",
-      name: "Smart Fitness Watch",
-      price: 199.99,
-      quantity: 2,
-      image:
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=80&h=80&fit=crop&crop=center",
-    },
-  ]);
-
-  const updateQuantity = (id: string, newQuantity: number) => {
-    if (newQuantity === 0) {
-      setCartItems(cartItems.filter((item) => item.id !== id));
-    } else {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === id ? { ...item, quantity: newQuantity } : item,
-        ),
-      );
-    }
-  };
-
-  const removeItem = (id: string) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
-  };
-
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
+  const { cart: cartItems, updateQuantity, removeFromCart, total } = useCart();
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -144,7 +98,7 @@ export default function CartModal({ cartItemCount }: CartModalProps) {
                       variant="ghost"
                       size="icon"
                       className="h-8 w-8 text-destructive hover:text-destructive"
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeFromCart(item.id)}
                     >
                       <Trash2 className="h-3 w-3" />
                     </Button>
