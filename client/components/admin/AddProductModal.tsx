@@ -50,11 +50,20 @@ export default function AddProductModal() {
   return (
     <AdminModal triggerLabel="Add Product" title="Add Product">
       <form onSubmit={handleSubmit} className="space-y-3">
+        <label className="text-sm font-medium">Product name</label>
         <Input placeholder="Product name" value={name} onChange={(e) => setName(e.target.value)} required />
+
+        <label className="text-sm font-medium">Category</label>
         <Input placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+
+        <label className="text-sm font-medium">Image URL</label>
         <Input placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} />
-        <Input placeholder="Price" type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} />
-        <Input placeholder="Stock count" type="number" value={stock} onChange={(e) => setStock(Number(e.target.value))} />
+
+        <label className="text-sm font-medium">Price</label>
+        <Input placeholder="Price" type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+
+        <label className="text-sm font-medium">Stock count</label>
+        <Input placeholder="Stock count" type="number" value={stock} onChange={(e) => setStock(e.target.value)} />
 
         {error && <p className="text-sm text-destructive">{error}</p>}
         {success && <p className="text-sm text-primary">{success}</p>}
