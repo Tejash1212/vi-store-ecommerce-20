@@ -10,8 +10,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const cartItemCount = 3; // This will come from cart state later
-  const wishlistCount = 5; // This will come from wishlist state later
+  const cartItemCount = 0;
+  const wishlistCount = 0;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
