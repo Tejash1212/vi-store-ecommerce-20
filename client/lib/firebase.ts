@@ -15,4 +15,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+// Ensure auth persistence is set to local so users stay signed in across reloads
+import { setPersistence, browserLocalPersistence } from "firebase/auth";
+setPersistence(auth, browserLocalPersistence).catch((err) => {
+  // Non-fatal; log for debugging
+  console.warn("Failed to set auth persistence:", err);
+});
+
+console.log("Firebase initialized", { projectId: firebaseConfig.projectId });
+
 export default app;
