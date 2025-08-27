@@ -26,6 +26,28 @@ export default function Header() {
     setSearchQuery(q);
   }, [location.search]);
 
+  // When user types in header, update URL 'q' param (debounced) so Index updates live
+  const debounceTimer = useRef<number | null>(null);
+  useEffect(() => {
+    // don't run on initial mount where location already sets searchQuery
+    if (debounceTimer.current) window.clearTimeout(debounceTimer.current);
+    debounceTimer.current = window.setTimeout(() => {
+      const params = new URLSearchParams(location.search);
+      const current = params.get("q") || "";
+      if (searchQuery !== current) {
+        if (searchQuery) {
+          navigate(`/?q=${encodeURIComponent(searchQuery)}`, { replace: true });
+        } else {
+          navigate(`/`, { replace: true });
+        }
+      }
+    }, 300);
+    return () => {
+      if (debounceTimer.current) window.clearTimeout(debounceTimer.current);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery]);
+
   // Track scroll direction to hide header on scroll down and show on scroll up
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
