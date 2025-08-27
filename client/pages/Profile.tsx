@@ -5,6 +5,9 @@ import { useAuth } from "@/context/AuthContext";
 import AdminModal from "@/components/AdminModal";
 import AddProductModal from "@/components/admin/AddProductModal";
 import ManageProductsModal from "@/components/admin/ManageProductsModal";
+import OrdersModal from "@/components/admin/OrdersModal";
+import AnalyticsModal from "@/components/admin/AnalyticsModal";
+import SettingsModal from "@/components/admin/SettingsModal";
 
 export default function Profile() {
   const { user, signOut } = useAuth();
