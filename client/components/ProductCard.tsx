@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 interface Product {
   id: string;
@@ -26,19 +30,37 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { addToCart, toggleWishlist, isWishlisted: isWL } = useCart();
+  const { user } = useAuth();
 
   const handleAddToCart = async (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent link navigation
+    e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    addToCart({ id: product.id, name: product.name, price: product.price, image: product.image }, 1);
+    await new Promise((r) => setTimeout(r, 200));
     setIsLoading(false);
-    // Add to cart logic here
+  };
+
+  const handleBuyNow = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await addDoc(collection(db, "orders"), {
+        userId: user?.uid || "guest",
+        items: [{ productId: product.id, name: product.name, price: product.price, qty: 1 }],
+        total: product.price,
+        status: "Pending",
+        createdAt: serverTimestamp(),
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent link navigation
-    setIsWishlisted(!isWishlisted);
+    e.preventDefault();
+    toggleWishlist({ id: product.id, name: product.name, price: product.price, image: product.image });
+    setIsWishlisted(!isWL(product.id));
   };
 
   const discountPercentage = product.originalPrice
@@ -144,13 +166,13 @@ export default function ProductCard({ product }: ProductCardProps) {
               )}
             </div>
 
-            {/* Add to Cart Button */}
-            <Button
-              className="w-full mt-3"
-              onClick={handleAddToCart}
-              disabled={!product.inStock || isLoading}
-              size="sm"
-            >
+            {/* Actions */}
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <Button
+                onClick={handleAddToCart}
+                disabled={!product.inStock || isLoading}
+                size="sm"
+              >
               {isLoading ? (
                 <div className="flex items-center gap-2">
                   <div className="h-4 w-4 animate-spin rounded-full border-2 border-transparent border-t-current" />
@@ -162,7 +184,16 @@ export default function ProductCard({ product }: ProductCardProps) {
                   {product.inStock ? "Add to Cart" : "Out of Stock"}
                 </div>
               )}
-            </Button>
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleBuyNow}
+                disabled={!product.inStock || isLoading}
+                size="sm"
+              >
+                Buy Now
+              </Button>
+            </div>
           </div>
         </div>
       </div>
