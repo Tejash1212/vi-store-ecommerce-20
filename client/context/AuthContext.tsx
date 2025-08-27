@@ -77,6 +77,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  if (!ctx) {
+    // Avoid crashing the entire app if provider is missing (useful during HMR or misconfig)
+    console.warn("AuthProvider is missing. Falling back to no-op auth.");
+    const noop = async () => {
+      throw new Error("AuthProvider is not mounted");
+    };
+    return {
+      user: null,
+      loading: false,
+      signUp: noop,
+      signIn: noop,
+      signOut: noop,
+      resetPassword: noop,
+      signInWithGoogle: noop,
+    } as unknown as AuthContextValue;
+  }
   return ctx;
 };
