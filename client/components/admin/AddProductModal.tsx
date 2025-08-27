@@ -10,10 +10,10 @@ export default function AddProductModal() {
   const [success, setSuccess] = useState<string | null>(null);
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
-  const [stock, setStock] = useState(0);
+  const [stock, setStock] = useState("");
 
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -21,22 +21,25 @@ export default function AddProductModal() {
     setSuccess(null);
     setLoading(true);
     try {
+      const numericPrice = parseFloat(String(price) || "0");
+      const numericStock = parseInt(String(stock) || "0", 10);
+
       await addProduct({
         name,
-        price: Number(price),
+        price: Number(isNaN(numericPrice) ? 0 : numericPrice),
         category,
         image,
-        inStock: stock > 0,
+        inStock: numericStock > 0,
         originalPrice: null,
         rating: 0,
         reviewCount: 0,
       });
       setSuccess("Product added successfully");
       setName("");
-      setPrice(0);
+      setPrice("");
       setCategory("");
       setImage("");
-      setStock(0);
+      setStock("");
     } catch (err: any) {
       setError(err?.message || "Failed to add product");
     } finally {
