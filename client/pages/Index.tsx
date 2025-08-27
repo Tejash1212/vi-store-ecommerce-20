@@ -173,6 +173,7 @@ export default function Index() {
         products={trendingProducts}
         title="🔥 Trending Products"
         subtitle="What's hot right now"
+        showViewAll={false}
       />
 
       {/* New Arrivals */}
@@ -180,6 +181,7 @@ export default function Index() {
         products={newProducts}
         title="✨ New Arrivals"
         subtitle="Fresh products just for you"
+        showViewAll={false}
       />
 
       {/* Most Bought Products */}
@@ -187,7 +189,30 @@ export default function Index() {
         products={mostBoughtProducts}
         title="⭐ Most Bought"
         subtitle="Customer favorites"
+        showViewAll={false}
       />
+
+      {/* All Products */}
+      <ProductGrid
+        products={mockProducts}
+        title="🗂️ All Products"
+        subtitle="Browse our entire catalog"
+        showViewAll={false}
+        columns={4}
+      />
+
+      {/* About Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold mb-4">About EliteStore</h2>
+          <p className="text-muted-foreground max-w-3xl">
+            EliteStore is a modern e-commerce storefront built to showcase trending items, new arrivals, and
+            customer favorites all on a single homepage. Built with performance and usability in mind, the site
+            includes search, filters, and a persistent cart modal for a smooth shopping experience. This demo
+            uses mock data but is ready to integrate with a backend for products, authentication, and orders.
+          </p>
+        </div>
+      </section>
 
     </div>
   );
