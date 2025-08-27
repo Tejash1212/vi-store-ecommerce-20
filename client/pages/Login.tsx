@@ -67,7 +67,7 @@ export default function Login() {
     e.preventDefault();
     setError(null);
     setMessage(null);
-    setLoading(true);
+    setSubmitting(true);
     try {
       await resetPassword(email);
       setMessage("Password reset email sent");
@@ -75,7 +75,7 @@ export default function Login() {
     } catch (err: any) {
       setError(err?.message || "Failed to send reset email");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
