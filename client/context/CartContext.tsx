@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 export type CartItem = {
   id: string;
@@ -32,7 +38,9 @@ const CartContext = createContext<CartContextValue | undefined>(undefined);
 const STORAGE_KEY = "vi-store-cart";
 const WISHLIST_KEY = "vi-store-wishlist";
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
 
@@ -63,29 +71,55 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCart((prev) => {
       const existing = prev.find((p) => p.id === item.id);
       if (existing) {
-        return prev.map((p) => (p.id === item.id ? { ...p, quantity: p.quantity + qty } : p));
+        return prev.map((p) =>
+          p.id === item.id ? { ...p, quantity: p.quantity + qty } : p,
+        );
       }
       return [...prev, { ...item, quantity: qty }];
     });
   };
 
-  const removeFromCart = (id: string) => setCart((prev) => prev.filter((p) => p.id !== id));
+  const removeFromCart = (id: string) =>
+    setCart((prev) => prev.filter((p) => p.id !== id));
 
   const updateQuantity = (id: string, qty: number) =>
-    setCart((prev) => prev.map((p) => (p.id === id ? { ...p, quantity: Math.max(0, qty) } : p)).filter((p) => p.quantity > 0));
+    setCart((prev) =>
+      prev
+        .map((p) => (p.id === id ? { ...p, quantity: Math.max(0, qty) } : p))
+        .filter((p) => p.quantity > 0),
+    );
 
   const clearCart = () => setCart([]);
 
   const toggleWishlist = (item: WishlistItem) => {
-    setWishlist((prev) => (prev.some((w) => w.id === item.id) ? prev.filter((w) => w.id !== item.id) : [...prev, item]));
+    setWishlist((prev) =>
+      prev.some((w) => w.id === item.id)
+        ? prev.filter((w) => w.id !== item.id)
+        : [...prev, item],
+    );
   };
 
   const isWishlisted = (id: string) => wishlist.some((w) => w.id === id);
 
-  const total = useMemo(() => cart.reduce((s, i) => s + i.price * i.quantity, 0), [cart]);
+  const total = useMemo(
+    () => cart.reduce((s, i) => s + i.price * i.quantity, 0),
+    [cart],
+  );
 
   return (
-    <CartContext.Provider value={{ cart, wishlist, addToCart, removeFromCart, updateQuantity, clearCart, toggleWishlist, isWishlisted, total }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        wishlist,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        toggleWishlist,
+        isWishlisted,
+        total,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

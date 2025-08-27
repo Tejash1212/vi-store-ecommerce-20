@@ -13,7 +13,8 @@ import {
 import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
-  const { signIn, signUp, resetPassword, signInWithGoogle, user, loading } = useAuth();
+  const { signIn, signUp, resetPassword, signInWithGoogle, user, loading } =
+    useAuth();
   const navigate = useNavigate();
 
   // If the user is already authenticated, redirect away from the login page
@@ -92,9 +93,11 @@ export default function Login() {
 
       // Provide helpful guidance for common Firebase auth errors
       if (err?.code === "auth/unauthorized-domain") {
-        errorMessage = "Google Sign-In is not enabled for this domain. Please use email/password sign-in or contact support.";
+        errorMessage =
+          "Google Sign-In is not enabled for this domain. Please use email/password sign-in or contact support.";
       } else if (err?.code === "auth/popup-blocked") {
-        errorMessage = "Pop-up was blocked. Please allow pop-ups and try again.";
+        errorMessage =
+          "Pop-up was blocked. Please allow pop-ups and try again.";
       } else if (err?.code === "auth/popup-closed-by-user") {
         errorMessage = "Sign-in was cancelled. Please try again.";
       }
@@ -165,7 +168,11 @@ export default function Login() {
                 {message && <p className="text-sm text-primary">{message}</p>}
 
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <Button type="submit" className="flex-1" disabled={submitting || loading}>
+                  <Button
+                    type="submit"
+                    className="flex-1"
+                    disabled={submitting || loading}
+                  >
                     {submitting || loading
                       ? "Please wait..."
                       : mode === "login"

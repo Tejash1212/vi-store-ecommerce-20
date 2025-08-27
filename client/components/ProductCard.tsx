@@ -36,7 +36,15 @@ export default function ProductCard({ product }: ProductCardProps) {
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    addToCart({ id: product.id, name: product.name, price: product.price, image: product.image }, 1);
+    addToCart(
+      {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      },
+      1,
+    );
     await new Promise((r) => setTimeout(r, 200));
     setIsLoading(false);
   };
@@ -47,7 +55,14 @@ export default function ProductCard({ product }: ProductCardProps) {
     try {
       await addDoc(collection(db, "orders"), {
         userId: user?.uid || "guest",
-        items: [{ productId: product.id, name: product.name, price: product.price, qty: 1 }],
+        items: [
+          {
+            productId: product.id,
+            name: product.name,
+            price: product.price,
+            qty: 1,
+          },
+        ],
         total: product.price,
         status: "Pending",
         createdAt: serverTimestamp(),
@@ -59,7 +74,12 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const handleToggleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
-    toggleWishlist({ id: product.id, name: product.name, price: product.price, image: product.image });
+    toggleWishlist({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+    });
     setIsWishlisted(!isWL(product.id));
   };
 
@@ -173,17 +193,17 @@ export default function ProductCard({ product }: ProductCardProps) {
                 disabled={!product.inStock || isLoading}
                 size="sm"
               >
-              {isLoading ? (
-                <div className="flex items-center gap-2">
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-transparent border-t-current" />
-                  Adding...
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <ShoppingCart className="h-4 w-4" />
-                  {product.inStock ? "Add to Cart" : "Out of Stock"}
-                </div>
-              )}
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-transparent border-t-current" />
+                    Adding...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <ShoppingCart className="h-4 w-4" />
+                    {product.inStock ? "Add to Cart" : "Out of Stock"}
+                  </div>
+                )}
               </Button>
               <Button
                 variant="outline"

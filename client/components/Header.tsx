@@ -45,7 +45,7 @@ export default function Header() {
     return () => {
       if (debounceTimer.current) window.clearTimeout(debounceTimer.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   // Track scroll direction to hide header on scroll down and show on scroll up
@@ -89,7 +89,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 shadow-md transform transition-transform duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"}`}>
+    <header
+      className={`sticky top-0 z-50 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 shadow-md transform transition-transform duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"}`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -104,8 +106,12 @@ export default function Header() {
               </p>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="font-extrabold text-white text-lg">VI Store</span>
-              <span className="text-xs text-white/80 -mt-0.5">Curated picks</span>
+              <span className="font-extrabold text-white text-lg">
+                VI Store
+              </span>
+              <span className="text-xs text-white/80 -mt-0.5">
+                Curated picks
+              </span>
             </div>
           </Link>
 
@@ -154,7 +160,11 @@ export default function Header() {
           {/* Actions */}
           <div className="flex items-center space-x-3">
             {/* Wishlist */}
-            <Button variant="ghost" size="icon" className="relative text-white/90">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative text-white/90"
+            >
               <Heart className="h-5 w-5 text-white/90" />
               {wishlistCount > 0 && (
                 <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">

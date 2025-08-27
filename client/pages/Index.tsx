@@ -139,19 +139,22 @@ export default function Index() {
   // When user types in the page search, update the URL debounced so header and other components stay in sync
   const searchDebounceRef = useRef<number | null>(null);
   useEffect(() => {
-    if (searchDebounceRef.current) window.clearTimeout(searchDebounceRef.current);
+    if (searchDebounceRef.current)
+      window.clearTimeout(searchDebounceRef.current);
     searchDebounceRef.current = window.setTimeout(() => {
       const params = new URLSearchParams(location.search);
       const current = params.get("q") || "";
       if (searchQuery !== current) {
-        if (searchQuery) navigate(`/?q=${encodeURIComponent(searchQuery)}`, { replace: true });
+        if (searchQuery)
+          navigate(`/?q=${encodeURIComponent(searchQuery)}`, { replace: true });
         else navigate(`/`, { replace: true });
       }
     }, 300);
     return () => {
-      if (searchDebounceRef.current) window.clearTimeout(searchDebounceRef.current);
+      if (searchDebounceRef.current)
+        window.clearTimeout(searchDebounceRef.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   // Subscribe to products collection in Firestore. Fall back to mockProducts while loading.
@@ -169,9 +172,11 @@ export default function Index() {
   const sourceProducts = products.length ? products : mockProducts;
 
   // Helper: base filter by category and search
-  const baseFiltered = sourceProducts.filter((p) =>
-    (selectedCategory === "All" || p.category === selectedCategory) &&
-    (searchQuery.trim() === "" || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+  const baseFiltered = sourceProducts.filter(
+    (p) =>
+      (selectedCategory === "All" || p.category === selectedCategory) &&
+      (searchQuery.trim() === "" ||
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())),
   );
 
   // Reusable sorter so the selected sort applies across all sections
@@ -180,7 +185,8 @@ export default function Index() {
     copy.sort((a, b) => {
       if (sort === "price-low") return a.price - b.price;
       if (sort === "price-high") return b.price - a.price;
-      if (sort === "popularity") return (b.reviewCount || 0) - (a.reviewCount || 0);
+      if (sort === "popularity")
+        return (b.reviewCount || 0) - (a.reviewCount || 0);
       if (sort === "newest") {
         const aNew = a.isNew ? 1 : 0;
         const bNew = b.isNew ? 1 : 0;
@@ -197,8 +203,14 @@ export default function Index() {
   };
 
   // Apply category/search filter then sort for each section
-  const trendingProducts = sortProducts(baseFiltered.filter((p) => p.isTrending), sortBy).slice(0, 4);
-  const newProducts = sortProducts(baseFiltered.filter((p) => p.isNew), sortBy).slice(0, 4);
+  const trendingProducts = sortProducts(
+    baseFiltered.filter((p) => p.isTrending),
+    sortBy,
+  ).slice(0, 4);
+  const newProducts = sortProducts(
+    baseFiltered.filter((p) => p.isNew),
+    sortBy,
+  ).slice(0, 4);
   const mostBoughtProducts = sortProducts(baseFiltered, sortBy).slice(0, 4); // top items after sorting
 
   const filteredAll = sortProducts(baseFiltered, sortBy);
@@ -256,34 +268,34 @@ export default function Index() {
       </section>
 
       {/* Trending Products */}
-  {trendingProducts.length > 0 && (
-    <ProductGrid
-      products={trendingProducts}
-      title="🔥 Trending Products"
-      subtitle="What's hot right now"
-      showViewAll={false}
-    />
-  )}
+      {trendingProducts.length > 0 && (
+        <ProductGrid
+          products={trendingProducts}
+          title="🔥 Trending Products"
+          subtitle="What's hot right now"
+          showViewAll={false}
+        />
+      )}
 
       {/* New Arrivals */}
-  {newProducts.length > 0 && (
-    <ProductGrid
-      products={newProducts}
-      title="✨ New Arrivals"
-      subtitle="Fresh products just for you"
-      showViewAll={false}
-    />
-  )}
+      {newProducts.length > 0 && (
+        <ProductGrid
+          products={newProducts}
+          title="✨ New Arrivals"
+          subtitle="Fresh products just for you"
+          showViewAll={false}
+        />
+      )}
 
       {/* Most Bought Products */}
-  {mostBoughtProducts.length > 0 && (
-    <ProductGrid
-      products={mostBoughtProducts}
-      title="⭐ Most Bought"
-      subtitle="Customer favorites"
-      showViewAll={false}
-    />
-  )}
+      {mostBoughtProducts.length > 0 && (
+        <ProductGrid
+          products={mostBoughtProducts}
+          title="⭐ Most Bought"
+          subtitle="Customer favorites"
+          showViewAll={false}
+        />
+      )}
 
       {/* All Products */}
       <ProductGrid

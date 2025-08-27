@@ -105,15 +105,20 @@ export const handleSeedProducts: RequestHandler = async (req, res) => {
     // Query existing products by name (where-in supports up to 10)
     const existingQuery = query(productsCol, where("name", "in", names));
     const snapshot = await getDocs(existingQuery);
-    const existingNames = new Set(snapshot.docs.map((d) => (d.data() as any).name));
+    const existingNames = new Set(
+      snapshot.docs.map((d) => (d.data() as any).name),
+    );
 
     const toCreate = productsToAdd.filter((p) => !existingNames.has(p.name));
 
     await Promise.all(
-      toCreate.map((p) => addDoc(productsCol, { ...p, createdAt: new Date() }))
+      toCreate.map((p) => addDoc(productsCol, { ...p, createdAt: new Date() })),
     );
 
-    res.json({ added: toCreate.length, skipped: productsToAdd.length - toCreate.length });
+    res.json({
+      added: toCreate.length,
+      skipped: productsToAdd.length - toCreate.length,
+    });
   } catch (err: any) {
     console.error("Seed products failed:", err);
     res.status(500).json({ error: err?.message || String(err) });

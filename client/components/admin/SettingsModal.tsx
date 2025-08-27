@@ -54,7 +54,11 @@ export default function SettingsModal() {
         </div>
         <div>
           <label className="text-sm font-medium">Currency</label>
-          <Input value={currency} onChange={(e) => setCurrency(e.target.value)} placeholder="USD" />
+          <Input
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            placeholder="USD"
+          />
         </div>
         {message && <p className="text-sm text-primary">{message}</p>}
         <Button size="sm" onClick={save} disabled={loading}>
