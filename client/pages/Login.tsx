@@ -51,7 +51,7 @@ export default function Login() {
     e.preventDefault();
     setError(null);
     setMessage(null);
-    setLoading(true);
+    setSubmitting(true);
     try {
       await signUp(email, password);
       setMessage("Account created successfully");
@@ -59,7 +59,7 @@ export default function Login() {
     } catch (err: any) {
       setError(err?.message || "Failed to create account");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
