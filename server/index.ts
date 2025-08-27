@@ -20,5 +20,8 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Add seed endpoint to populate initial products in Firestore
+  app.post("/api/seed-products", handleSeedProducts);
+
   return app;
 }
