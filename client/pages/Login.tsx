@@ -82,7 +82,7 @@ export default function Login() {
   const handleGoogle = async () => {
     setError(null);
     setMessage(null);
-    setLoading(true);
+    setSubmitting(true);
     try {
       await signInWithGoogle();
       setMessage("Signed in with Google");
@@ -101,7 +101,7 @@ export default function Login() {
 
       setError(errorMessage);
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
