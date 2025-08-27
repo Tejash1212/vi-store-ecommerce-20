@@ -106,7 +106,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               onClick={handleToggleWishlist}
             >
               <Heart
-                className={`h-4 w-4 ${isWishlisted ? "fill-current text-red-500" : ""}`}
+                className={`h-4 w-4 ${isWL(product.id) ? "fill-current text-red-500" : ""}`}
               />
             </Button>
             <Button size="icon" variant="secondary" className="h-8 w-8">
