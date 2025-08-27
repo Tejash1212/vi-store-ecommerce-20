@@ -4,14 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import CartModal from "./CartModal";
+import { useCart } from "@/context/CartContext";
 import { Search, User, Heart, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const cartItemCount = 0;
-  const wishlistCount = 0;
+  const { cart, wishlist } = useCart();
+  const cartItemCount = cart.reduce((s, i) => s + i.quantity, 0);
+  const wishlistCount = wishlist.length;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
