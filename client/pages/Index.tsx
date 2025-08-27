@@ -223,28 +223,34 @@ export default function Index() {
       </section>
 
       {/* Trending Products */}
-      <ProductGrid
-        products={trendingProducts}
-        title="🔥 Trending Products"
-        subtitle="What's hot right now"
-        showViewAll={false}
-      />
+  {trendingProducts.length > 0 && (
+    <ProductGrid
+      products={trendingProducts}
+      title="🔥 Trending Products"
+      subtitle="What's hot right now"
+      showViewAll={false}
+    />
+  )}
 
       {/* New Arrivals */}
-      <ProductGrid
-        products={newProducts}
-        title="✨ New Arrivals"
-        subtitle="Fresh products just for you"
-        showViewAll={false}
-      />
+  {newProducts.length > 0 && (
+    <ProductGrid
+      products={newProducts}
+      title="✨ New Arrivals"
+      subtitle="Fresh products just for you"
+      showViewAll={false}
+    />
+  )}
 
       {/* Most Bought Products */}
-      <ProductGrid
-        products={mostBoughtProducts}
-        title="⭐ Most Bought"
-        subtitle="Customer favorites"
-        showViewAll={false}
-      />
+  {mostBoughtProducts.length > 0 && (
+    <ProductGrid
+      products={mostBoughtProducts}
+      title="⭐ Most Bought"
+      subtitle="Customer favorites"
+      showViewAll={false}
+    />
+  )}
 
       {/* All Products */}
       <ProductGrid
