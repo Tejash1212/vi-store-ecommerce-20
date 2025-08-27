@@ -88,7 +88,9 @@ export default function Profile() {
                         <h5 className="font-semibold">Settings</h5>
                         <p className="text-sm text-muted-foreground mb-3">Configure store settings, coupons and shipping.</p>
                         <div className="flex gap-2">
-                          <Button size="sm">Store Settings</Button>
+                          <AdminModal triggerLabel="Store Settings" title="Store Settings">
+                            <p className="text-sm text-muted-foreground">Configure coupons, shipping and store preferences here.</p>
+                          </AdminModal>
                         </div>
                       </div>
                     </div>
