@@ -125,6 +125,15 @@ export default function Index() {
   const [sortBy, setSortBy] = useState("featured");
   const [products, setProducts] = useState<any[]>([]);
 
+  // Sync searchQuery with URL param 'q'
+  const { search } = window.location ? window.location : { search: "" };
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const q = params.get("q") || "";
+    setSearchQuery(q);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   // Subscribe to products collection in Firestore. Fall back to mockProducts while loading.
   useEffect(() => {
     let unsub: (() => void) | undefined;
