@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Search, 
-  ShoppingCart, 
-  User, 
+import CartModal from "./CartModal";
+import {
+  Search,
+  User,
   Heart,
   Menu,
   X
@@ -36,14 +36,11 @@ export default function Header() {
             <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
               Home
             </Link>
-            <Link to="/products" className="text-sm font-medium hover:text-primary transition-colors">
-              Products
+            <Link to="/login" className="text-sm font-medium hover:text-primary transition-colors">
+              Login
             </Link>
-            <Link to="/categories" className="text-sm font-medium hover:text-primary transition-colors">
-              Categories
-            </Link>
-            <Link to="/deals" className="text-sm font-medium hover:text-primary transition-colors">
-              Deals
+            <Link to="/profile" className="text-sm font-medium hover:text-primary transition-colors">
+              Profile
             </Link>
           </nav>
 
@@ -72,15 +69,8 @@ export default function Header() {
               )}
             </Button>
 
-            {/* Cart */}
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              {cartItemCount > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
-                  {cartItemCount}
-                </Badge>
-              )}
-            </Button>
+            {/* Cart Modal */}
+            <CartModal cartItemCount={cartItemCount} />
 
             {/* User Account */}
             <Link to="/login">
@@ -117,33 +107,26 @@ export default function Header() {
 
             {/* Mobile Navigation */}
             <nav className="flex flex-col space-y-2">
-              <Link 
-                to="/" 
+              <Link
+                to="/"
                 className="px-2 py-2 text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
-              <Link 
-                to="/products" 
+              <Link
+                to="/login"
                 className="px-2 py-2 text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Products
+                Login
               </Link>
-              <Link 
-                to="/categories" 
+              <Link
+                to="/profile"
                 className="px-2 py-2 text-sm font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Categories
-              </Link>
-              <Link 
-                to="/deals" 
-                className="px-2 py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Deals
+                Profile
               </Link>
             </nav>
           </div>
