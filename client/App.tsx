@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "@/context/AuthContext";
+import { CartProvider } from "@/context/CartContext";
 
 const queryClient = new QueryClient();
 
