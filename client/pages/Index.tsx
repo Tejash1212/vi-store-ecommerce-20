@@ -230,7 +230,7 @@ export default function Index() {
 
       {/* All Products */}
       <ProductGrid
-        products={mockProducts}
+        products={filteredAll}
         title="🗂️ All Products"
         subtitle="Browse our entire catalog"
         showViewAll={false}
