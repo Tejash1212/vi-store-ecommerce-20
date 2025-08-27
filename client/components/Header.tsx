@@ -16,70 +16,66 @@ export default function Header() {
   const wishlistCount = wishlist.length;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="h-8 w-10 rounded-lg bg-primary flex items-center justify-center">
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center shadow-lg">
               <p style={{ margin: 0 }}>
                 <strong style={{ color: "rgb(252, 251, 251)" }}>
                   <em>
                     <u>VI</u>
                   </em>
                 </strong>
-                <strong style={{ color: "rgb(252, 251, 251)", backgroundColor: "rgb(80, 227, 194)" }}>
-                  <em>
-                    <u>
-                      <span className="ql-cursor">{"\uFEFF"}</span>
-                    </u>
-                  </em>
-                </strong>
               </p>
             </div>
-            <span className="font-bold text-xl">VI Store</span>
+            <div className="flex flex-col leading-none">
+              <span className="font-extrabold text-white text-lg">VI Store</span>
+              <span className="text-xs text-white/80 -mt-0.5">Curated picks</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link
               to="/"
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className="text-sm font-medium text-white/90 hover:text-white transition-colors px-2 py-1 rounded-md hover:bg-white/10"
             >
               Home
             </Link>
             <Link
               to="/login"
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className="text-sm font-medium text-white/90 hover:text-white transition-colors px-2 py-1 rounded-md hover:bg-white/10"
             >
               Login
             </Link>
             <Link
               to="/profile"
-              className="text-sm font-medium hover:text-primary transition-colors"
+              className="text-sm font-medium text-white/90 hover:text-white transition-colors px-2 py-1 rounded-md hover:bg-white/10"
             >
               Profile
             </Link>
           </nav>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center space-x-4 flex-1 max-w-md mx-8">
+          <div className="hidden md:flex items-center flex-1 max-w-lg mx-8">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/70" />
               <Input
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4"
+                className="pl-12 pr-4 rounded-full bg-white/5 text-white placeholder:text-white/60 shadow-sm border border-white/10"
               />
             </div>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             {/* Wishlist */}
-            <Button variant="ghost" size="icon" className="relative">
-              <Heart className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="relative text-white/90">
+              <Heart className="h-5 w-5 text-white/90" />
               {wishlistCount > 0 && (
                 <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
                   {wishlistCount}
@@ -92,8 +88,8 @@ export default function Header() {
 
             {/* User Account */}
             <Link to="/login">
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
+              <Button variant="ghost" size="icon" className="text-white/90">
+                <User className="h-5 w-5 text-white/90" />
               </Button>
             </Link>
 
@@ -101,13 +97,13 @@ export default function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden text-white/90"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5 text-white/90" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-5 w-5 text-white/90" />
               )}
             </Button>
           </div>
@@ -115,37 +111,37 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t py-4">
+          <div className="md:hidden border-t py-4 bg-white/5 rounded-b-md mt-2">
             {/* Mobile Search */}
-            <div className="relative mb-4">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <div className="relative mb-4 px-4">
+              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/70" />
               <Input
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4"
+                className="pl-12 pr-4 rounded-full bg-white/5 text-white placeholder:text-white/60 shadow-sm border border-white/10"
               />
             </div>
 
             {/* Mobile Navigation */}
-            <nav className="flex flex-col space-y-2">
+            <nav className="flex flex-col space-y-2 px-4">
               <Link
                 to="/"
-                className="px-2 py-2 text-sm font-medium hover:text-primary transition-colors"
+                className="px-2 py-2 text-sm font-medium text-white/90 rounded-md hover:bg-white/10"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 to="/login"
-                className="px-2 py-2 text-sm font-medium hover:text-primary transition-colors"
+                className="px-2 py-2 text-sm font-medium text-white/90 rounded-md hover:bg-white/10"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Login
               </Link>
               <Link
                 to="/profile"
-                className="px-2 py-2 text-sm font-medium hover:text-primary transition-colors"
+                className="px-2 py-2 text-sm font-medium text-white/90 rounded-md hover:bg-white/10"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Profile
