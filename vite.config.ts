@@ -1,4 +1,5 @@
 import { defineConfig, Plugin } from "vite";
+import { defineConfig, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { createServer } from "./server";
@@ -23,6 +24,15 @@ export default defineConfig(({ mode }) => ({
       "@shared": path.resolve(__dirname, "./shared"),
     },
   },
+  optimizeDeps: {
+    include: [
+      "firebase/app",
+      "firebase/auth",
+      "firebase/firestore",
+      "firebase/storage",
+      "firebase/analytics"
+    ]
+  }
 }));
 
 function expressPlugin(): Plugin {
