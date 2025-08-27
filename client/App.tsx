@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
+import { AuthProvider } from "@/context/AuthContext";
 
 const queryClient = new QueryClient();
 
