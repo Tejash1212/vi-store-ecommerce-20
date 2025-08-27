@@ -135,9 +135,25 @@ export default function Index() {
       (searchQuery.trim() === "" || p.name.toLowerCase().includes(searchQuery.toLowerCase()))
     )
     .sort((a, b) => {
+      // Price sorts
       if (sortBy === "price-low") return a.price - b.price;
       if (sortBy === "price-high") return b.price - a.price;
-      if (sortBy === "newest") return (b as any).createdAt - (a as any).createdAt;
+
+      // Popularity (by number of reviews)
+      if (sortBy === "popularity") return (b.reviewCount || 0) - (a.reviewCount || 0);
+
+      // Newest: prefer items marked as "isNew" then fallback to numeric id if available
+      if (sortBy === "newest") {
+        const aNew = a.isNew ? 1 : 0;
+        const bNew = b.isNew ? 1 : 0;
+        if (aNew !== bNew) return bNew - aNew;
+        const aId = Number(a.id);
+        const bId = Number(b.id);
+        if (!isNaN(aId) && !isNaN(bId)) return bId - aId;
+        return 0;
+      }
+
+      // Featured or unknown sort: keep original order
       return 0;
     });
 
