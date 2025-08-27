@@ -43,10 +43,45 @@ export default function Profile() {
 
                   <div className="mt-6">
                     <h4 className="font-semibold">Admin Dashboard</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Accessible to admin users only. Admin features (product
-                      management, orders, analytics) will be placed here.
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Manage products, orders and view analytics. These admin tools are available to all users in this demo.
                     </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="p-4 rounded-lg border bg-card">
+                        <h5 className="font-semibold">Product Management</h5>
+                        <p className="text-sm text-muted-foreground mb-3">Add, edit or remove products from the catalog.</p>
+                        <div className="flex gap-2">
+                          <Button size="sm">Add Product</Button>
+                          <Button size="sm" variant="outline">Edit Products</Button>
+                        </div>
+                      </div>
+
+                      <div className="p-4 rounded-lg border bg-card">
+                        <h5 className="font-semibold">Orders</h5>
+                        <p className="text-sm text-muted-foreground mb-3">Manage and update order statuses.</p>
+                        <div className="flex gap-2">
+                          <Button size="sm">View Orders</Button>
+                          <Button size="sm" variant="outline">Manage Returns</Button>
+                        </div>
+                      </div>
+
+                      <div className="p-4 rounded-lg border bg-card">
+                        <h5 className="font-semibold">Analytics</h5>
+                        <p className="text-sm text-muted-foreground mb-3">View sales, top products, and user engagement.</p>
+                        <div className="flex gap-2">
+                          <Button size="sm">View Dashboard</Button>
+                        </div>
+                      </div>
+
+                      <div className="p-4 rounded-lg border bg-card">
+                        <h5 className="font-semibold">Settings</h5>
+                        <p className="text-sm text-muted-foreground mb-3">Configure store settings, coupons and shipping.</p>
+                        <div className="flex gap-2">
+                          <Button size="sm">Store Settings</Button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ) : (
