@@ -65,8 +65,12 @@ export default function Profile() {
                         <h5 className="font-semibold">Orders</h5>
                         <p className="text-sm text-muted-foreground mb-3">Manage and update order statuses.</p>
                         <div className="flex gap-2">
-                          <Button size="sm">View Orders</Button>
-                          <Button size="sm" variant="outline">Manage Returns</Button>
+                          <AdminModal triggerLabel="View Orders" title="Orders">
+                            <p className="text-sm text-muted-foreground">Order list and status management will appear here.</p>
+                          </AdminModal>
+                          <AdminModal triggerLabel="Manage Returns" title="Manage Returns" variant="outline">
+                            <p className="text-sm text-muted-foreground">Return requests and processing tools will appear here.</p>
+                          </AdminModal>
                         </div>
                       </div>
 
