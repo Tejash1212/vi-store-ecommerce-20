@@ -67,9 +67,7 @@ export default function Profile() {
                         <h5 className="font-semibold">Orders</h5>
                         <p className="text-sm text-muted-foreground mb-3">Manage and update order statuses.</p>
                         <div className="flex gap-2">
-                          <AdminModal triggerLabel="View Orders" title="Orders">
-                            <p className="text-sm text-muted-foreground">Order list and status management will appear here.</p>
-                          </AdminModal>
+                          <OrdersModal />
                           <AdminModal triggerLabel="Manage Returns" title="Manage Returns" variant="outline">
                             <p className="text-sm text-muted-foreground">Return requests and processing tools will appear here.</p>
                           </AdminModal>
@@ -80,9 +78,7 @@ export default function Profile() {
                         <h5 className="font-semibold">Analytics</h5>
                         <p className="text-sm text-muted-foreground mb-3">View sales, top products, and user engagement.</p>
                         <div className="flex gap-2">
-                          <AdminModal triggerLabel="View Dashboard" title="Analytics">
-                            <p className="text-sm text-muted-foreground">Charts and metrics will appear here.</p>
-                          </AdminModal>
+                          <AnalyticsModal />
                         </div>
                       </div>
 
@@ -90,9 +86,7 @@ export default function Profile() {
                         <h5 className="font-semibold">Settings</h5>
                         <p className="text-sm text-muted-foreground mb-3">Configure store settings, coupons and shipping.</p>
                         <div className="flex gap-2">
-                          <AdminModal triggerLabel="Store Settings" title="Store Settings">
-                            <p className="text-sm text-muted-foreground">Configure coupons, shipping and store preferences here.</p>
-                          </AdminModal>
+                          <SettingsModal />
                         </div>
                       </div>
                     </div>
