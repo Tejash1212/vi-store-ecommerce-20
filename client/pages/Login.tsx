@@ -35,7 +35,7 @@ export default function Login() {
     e.preventDefault();
     setError(null);
     setMessage(null);
-    setLoading(true);
+    setSubmitting(true);
     try {
       await signIn(email, password);
       setMessage("Logged in successfully");
@@ -43,7 +43,7 @@ export default function Login() {
     } catch (err: any) {
       setError(err?.message || "Failed to sign in");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
