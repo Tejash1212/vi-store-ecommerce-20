@@ -107,18 +107,43 @@
     @apply bg-background text-foreground font-sans;
   }
 
+  /* Performance optimizations */
+  * {
+    /* Enable hardware acceleration for transforms */
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Optimize common transitions */
+  .transition-all,
+  .transition-transform,
+  .transition-colors {
+    will-change: transform, color, background-color;
+  }
+
   .gradient-bg {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 
   .product-hover {
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    will-change: transform, box-shadow;
   }
 
   .product-hover:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px) translateZ(0); /* Reduced distance for better performance */
     box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      0 10px 20px -5px rgba(0, 0, 0, 0.1),
+      0 6px 6px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Dark mode transition */
+  .dark-transition {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 }
