@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-import { Star, Heart, ShoppingCart, ArrowLeft } from "lucide-react";
+import { Star, ShoppingCart, ArrowLeft } from "lucide-react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -125,7 +125,7 @@ export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const { addToCart, toggleWishlist, isWishlisted } = useCart();
+  const { addToCart } = useCart();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -173,10 +173,6 @@ export default function ProductDetail() {
     }
   };
 
-  const handleToggleWishlist = () => {
-    if (!product) return;
-    toggleWishlist({ id: product.id, name: product.name, price: product.price, image: product.image });
-  };
 
   const discountPercentage = product?.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -308,17 +304,6 @@ export default function ProductDetail() {
                       Add to Cart
                     </div>
                   )}
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={handleToggleWishlist}
-                  size="icon"
-                >
-                  <Heart
-                    className={`h-4 w-4 ${
-                      isWishlisted(product.id) ? "fill-current text-red-500" : ""
-                    }`}
-                  />
                 </Button>
               </div>
               <Button
