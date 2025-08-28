@@ -250,7 +250,7 @@ export default function Index() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
       <Header />
 
       {/* Filters & Search Section */}
@@ -367,9 +367,30 @@ export default function Index() {
                 </ul>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="aspect-square rounded-xl bg-muted" />
-                <div className="aspect-square rounded-xl bg-muted" />
-                <div className="col-span-2 h-24 rounded-xl bg-gradient-to-r from-primary/20 via-purple-500/20 to-blue-500/20" />
+                <div className="aspect-square rounded-xl overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1507152832244-10d45c7eda06?w=800&h=800&fit=crop&crop=center&auto=format&dpr=1"
+                    alt="Modern retail store interior"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="aspect-square rounded-xl overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=800&fit=crop&crop=center&auto=format&dpr=1"
+                    alt="Fashion boutique with curated displays"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="col-span-2 rounded-xl overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1544441893-675973e31985?w=1600&h=400&fit=crop&crop=center&auto=format&dpr=1"
+                    alt="Storefront with welcoming atmosphere"
+                    className="h-24 w-full object-cover md:h-32"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           </div>
