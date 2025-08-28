@@ -41,7 +41,9 @@ export default function Header() {
       const current = params.get("q") || "";
       if (searchQuery !== current) {
         if (searchQuery.trim()) {
-          navigate(`/?q=${encodeURIComponent(searchQuery.trim())}`, { replace: true });
+          navigate(`/?q=${encodeURIComponent(searchQuery.trim())}`, {
+            replace: true,
+          });
         } else {
           navigate(`/`, { replace: true });
         }
@@ -50,7 +52,7 @@ export default function Header() {
     return () => {
       if (debounceTimer.current) window.clearTimeout(debounceTimer.current);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   // Track scroll direction to hide header on scroll down and show on scroll up
