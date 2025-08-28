@@ -2,19 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import CartModal from "./CartModal";
 import { useCart } from "@/context/CartContext";
-import { Search, User, Heart, Menu, X } from "lucide-react";
+import { Search, User, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [hidden, setHidden] = useState(false);
 
-  const { cart, wishlist } = useCart();
+  const { cart } = useCart();
   const cartItemCount = cart.reduce((s, i) => s + i.quantity, 0);
-  const wishlistCount = wishlist.length;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -179,20 +177,6 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center space-x-3">
-            {/* Wishlist */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="relative text-white/90"
-            >
-              <Heart className="h-5 w-5 text-white/90" />
-              {wishlistCount > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs">
-                  {wishlistCount}
-                </Badge>
-              )}
-            </Button>
-
             {/* Cart Modal */}
             <CartModal cartItemCount={cartItemCount} />
 
