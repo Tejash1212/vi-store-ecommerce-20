@@ -367,22 +367,7 @@ export default function Index() {
                 </ul>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="aspect-square rounded-xl overflow-hidden grid grid-rows-2 gap-2">
-                  <img
-                    src="https://images.unsplash.com/photo-1507152832244-10d45c7eda06?auto=format&fit=crop&w=800&h=394&q=80"
-                    alt="Modern retail store interior"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1521334726092-b509a19597c9?auto=format&fit=crop&w=800&h=394&q=80"
-                    alt="Electronics store aisle with displays"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
+                <div className="aspect-square rounded-xl bg-muted" />
                 <div className="aspect-square rounded-xl overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&h=800&fit=crop&crop=center&auto=format&dpr=1"
