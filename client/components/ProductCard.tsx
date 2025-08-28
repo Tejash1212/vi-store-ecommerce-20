@@ -28,7 +28,6 @@ interface ProductCardProps {
 }
 
 const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { addToCart, toggleWishlist, isWishlisted: isWL } = useCart();
   const { user } = useAuth();
