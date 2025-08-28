@@ -51,11 +51,12 @@ export default function Header() {
   // Track scroll direction to hide header on scroll down and show on scroll up
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const throttleTimer = useRef<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     lastScrollY.current = window.scrollY || 0;
-    const threshold = 10;
+    const threshold = 15; // Increased threshold to reduce sensitivity
 
     const update = () => {
       const current = window.scrollY || 0;
@@ -66,8 +67,8 @@ export default function Header() {
         return;
       }
 
-      if (diff > 0 && current > 100) {
-        // scrolling down
+      if (diff > 0 && current > 120) {
+        // scrolling down - only hide after scrolling past header height + some buffer
         setHidden(true);
       } else if (diff < 0) {
         // scrolling up
@@ -78,14 +79,26 @@ export default function Header() {
       ticking.current = false;
     };
 
+    // Throttle scroll events for better performance
     const onScroll = () => {
-      if (ticking.current) return;
-      ticking.current = true;
-      requestAnimationFrame(update);
+      if (throttleTimer.current) return;
+
+      throttleTimer.current = window.setTimeout(() => {
+        if (!ticking.current) {
+          ticking.current = true;
+          requestAnimationFrame(update);
+        }
+        throttleTimer.current = null;
+      }, 16); // ~60fps
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll as any);
+    return () => {
+      window.removeEventListener("scroll", onScroll as any);
+      if (throttleTimer.current) {
+        window.clearTimeout(throttleTimer.current);
+      }
+    };
   }, []);
 
   return (
