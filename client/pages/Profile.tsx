@@ -13,6 +13,7 @@ import { Moon, Sun } from "lucide-react";
 
 export default function Profile() {
   const { user, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="min-h-screen bg-background">
