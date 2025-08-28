@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
+import { ShoppingCart, Star, Eye } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -29,7 +29,7 @@ interface ProductCardProps {
 
 const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const { addToCart, toggleWishlist, isWishlisted: isWL } = useCart();
+  const { addToCart } = useCart();
   const { user } = useAuth();
 
   const handleAddToCart = async (e: React.MouseEvent) => {
@@ -71,15 +71,6 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
     }
   };
 
-  const handleToggleWishlist = (e: React.MouseEvent) => {
-    e.preventDefault();
-    toggleWishlist({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-    });
-  };
 
   const discountPercentage = product.originalPrice
     ? Math.round(
@@ -117,16 +108,6 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
 
           {/* Quick Actions */}
           <div className="absolute top-2 right-2 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            <Button
-              size="icon"
-              variant="secondary"
-              className="h-8 w-8"
-              onClick={handleToggleWishlist}
-            >
-              <Heart
-                className={`h-4 w-4 ${isWL(product.id) ? "fill-current text-red-500" : ""}`}
-              />
-            </Button>
             <Button size="icon" variant="secondary" className="h-8 w-8">
               <Eye className="h-4 w-4" />
             </Button>
