@@ -138,18 +138,26 @@ export default function Index() {
 
   // When user types in the page search, update the URL debounced so header and other components stay in sync
   const searchDebounceRef = useRef<number | null>(null);
+  const isInitialSearchMount = useRef(true);
+
   useEffect(() => {
+    // Skip initial mount to prevent unnecessary navigation
+    if (isInitialSearchMount.current) {
+      isInitialSearchMount.current = false;
+      return;
+    }
+
     if (searchDebounceRef.current)
       window.clearTimeout(searchDebounceRef.current);
     searchDebounceRef.current = window.setTimeout(() => {
       const params = new URLSearchParams(location.search);
       const current = params.get("q") || "";
       if (searchQuery !== current) {
-        if (searchQuery)
-          navigate(`/?q=${encodeURIComponent(searchQuery)}`, { replace: true });
+        if (searchQuery.trim())
+          navigate(`/?q=${encodeURIComponent(searchQuery.trim())}`, { replace: true });
         else navigate(`/`, { replace: true });
       }
-    }, 300);
+    }, 500); // Increased debounce time for better performance
     return () => {
       if (searchDebounceRef.current)
         window.clearTimeout(searchDebounceRef.current);
