@@ -162,7 +162,7 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
                   <Star
                     key={i}
                     className={`h-3 w-3 ${
-                      i < Math.floor(product.rating)
+                      i < Math.floor((product.rating || 0))
                         ? "fill-yellow-400 text-yellow-400"
                         : "text-gray-300"
                     }`}
