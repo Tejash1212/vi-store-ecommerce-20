@@ -1,3 +1,4 @@
+import React from "react";
 import ProductCard from "./ProductCard";
 
 interface Product {
@@ -23,7 +24,7 @@ interface ProductGridProps {
   columns?: 2 | 3 | 4 | 5;
 }
 
-export default function ProductGrid({
+const ProductGrid = React.memo(function ProductGrid({
   products,
   title,
   subtitle,
@@ -67,4 +68,6 @@ export default function ProductGrid({
       </div>
     </section>
   );
-}
+});
+
+export default ProductGrid;
