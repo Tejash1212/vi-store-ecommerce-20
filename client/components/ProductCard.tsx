@@ -170,7 +170,7 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
                 ))}
               </div>
               <span className="text-xs text-muted-foreground">
-                ({product.reviewCount})
+                ({product.reviewCount ?? 0})
               </span>
             </div>
 
