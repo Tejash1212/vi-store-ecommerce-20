@@ -419,6 +419,9 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* AI Chatbot */}
+      <Chatbot />
     </div>
   );
 }
