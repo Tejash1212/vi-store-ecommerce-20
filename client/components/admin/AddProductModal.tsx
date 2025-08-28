@@ -3,6 +3,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import AdminModal from "@/components/AdminModal";
 import { addProduct } from "@/lib/products";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+const CATEGORIES = [
+  "Electronics",
+  "Fashion",
+  "Gaming",
+  "Kitchen",
+  "Furniture",
+  "Audio",
+  "Wearables",
+  "Photography",
+];
 
 export default function AddProductModal() {
   const [loading, setLoading] = useState(false);
@@ -11,7 +23,7 @@ export default function AddProductModal() {
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<string>(CATEGORIES[0]);
   const [image, setImage] = useState("");
   const [stock, setStock] = useState("");
 
@@ -33,11 +45,12 @@ export default function AddProductModal() {
         originalPrice: null,
         rating: 0,
         reviewCount: 0,
+        isNew: true,
       });
       setSuccess("Product added successfully");
       setName("");
       setPrice("");
-      setCategory("");
+      setCategory(CATEGORIES[0]);
       setImage("");
       setStock("");
     } catch (err: any) {
@@ -59,11 +72,16 @@ export default function AddProductModal() {
         />
 
         <label className="text-sm font-medium">Category</label>
-        <Input
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
+        <Select value={category} onValueChange={setCategory}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a category" />
+          </SelectTrigger>
+          <SelectContent>
+            {CATEGORIES.map((c) => (
+              <SelectItem key={c} value={c}>{c}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
         <label className="text-sm font-medium">Image URL</label>
         <Input
