@@ -127,9 +127,6 @@ export default function Header() {
               <span className="font-extrabold text-white text-lg">
                 VI Store
               </span>
-              <span className="text-xs text-white/80 -mt-0.5">
-                Curated picks
-              </span>
             </div>
           </Link>
 
