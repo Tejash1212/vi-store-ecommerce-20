@@ -171,21 +171,19 @@ export default function Index() {
     let unsub: (() => void) | undefined;
     let isActive = true; // Prevent state updates if component unmounted
 
-    try {
-      const { onProductsSnapshot } = require("@/lib/products");
-      unsub = onProductsSnapshot((items: any[]) => {
-        if (isActive) {
-          console.log("Products received from Firestore:", items?.length || 0, "items");
-          setProducts(items || []);
-        }
-      });
-    } catch (err) {
-      console.warn("Could not subscribe to products snapshot:", err);
-      // Keep products empty array so mock products will be used
-      if (isActive) {
-        setProducts([]);
+    (async () => {
+      try {
+        const mod = await import("@/lib/products");
+        unsub = mod.onProductsSnapshot((items: any[]) => {
+          if (isActive) {
+            setProducts(items || []);
+          }
+        });
+      } catch (err) {
+        console.warn("Could not subscribe to products snapshot:", err);
+        if (isActive) setProducts([]);
       }
-    }
+    })();
 
     return () => {
       isActive = false;
@@ -232,8 +230,16 @@ export default function Index() {
     baseFiltered.filter((p) => p.isTrending),
     sortBy,
   ).slice(0, 4);
+  // Treat items as "new" if explicitly flagged OR created within the last 30 days
+  const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000;
+  const now = Date.now();
+  const isRecent = (p: any) => {
+    const c = p.createdAt;
+    const d = c?.toDate ? c.toDate() : c instanceof Date ? c : null;
+    return d ? now - d.getTime() <= thirtyDaysMs : false;
+    };
   const newProducts = sortProducts(
-    baseFiltered.filter((p) => p.isNew),
+    baseFiltered.filter((p) => p.isNew || isRecent(p)),
     sortBy,
   ).slice(0, 4);
   const mostBoughtProducts = sortProducts(baseFiltered, sortBy).slice(0, 4); // top items after sorting
