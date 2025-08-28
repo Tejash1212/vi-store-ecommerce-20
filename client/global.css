@@ -107,13 +107,6 @@
     @apply bg-background text-foreground font-sans;
   }
 
-  /* Performance optimizations */
-  * {
-    /* Enable hardware acceleration for transforms */
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-  }
-
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
