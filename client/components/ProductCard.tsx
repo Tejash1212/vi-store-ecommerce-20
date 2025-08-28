@@ -79,7 +79,6 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
       price: product.price,
       image: product.image,
     });
-    setIsWishlisted(!isWL(product.id));
   };
 
   const discountPercentage = product.originalPrice
