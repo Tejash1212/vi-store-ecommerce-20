@@ -383,11 +383,11 @@ export default function Index() {
                     loading="lazy"
                   />
                 </div>
-                <div className="col-span-2 rounded-xl overflow-hidden">
+                <div className="col-span-2 rounded-xl overflow-hidden aspect-[21/9] md:aspect-[16/6]">
                   <img
-                    src="https://images.unsplash.com/photo-1544441893-675973e31985?w=1600&h=400&fit=crop&crop=center&auto=format&dpr=1"
+                    src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&auto=format&fit=crop&w=1600&h=500"
                     alt="Storefront with welcoming atmosphere"
-                    className="h-24 w-full object-cover md:h-32"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
