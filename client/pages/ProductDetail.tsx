@@ -129,10 +129,24 @@ export default function ProductDetail() {
   const { user } = useAuth();
 
   useEffect(() => {
-    // For now, find product from mock data.
-    // TODO: Later integrate with Firestore products collection
-    const foundProduct = mockProducts.find((p) => p.id === id);
-    setProduct(foundProduct || null);
+    let active = true;
+    (async () => {
+      try {
+        const mod = await import("@/lib/products");
+        const fromDb = id ? await mod.getProductById(id) : null;
+        if (active && fromDb) {
+          setProduct(fromDb);
+          return;
+        }
+      } catch (e) {
+        // ignore and fallback to mock
+      }
+      const foundProduct = mockProducts.find((p) => p.id === id) || null;
+      if (active) setProduct(foundProduct);
+    })();
+    return () => {
+      active = false;
+    };
   }, [id]);
 
   const handleAddToCart = async () => {
