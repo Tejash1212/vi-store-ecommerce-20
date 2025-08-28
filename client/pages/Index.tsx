@@ -278,7 +278,7 @@ export default function Index() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="text-sm border rounded px-3 py-1"
+                className="text-sm border border-input bg-background text-foreground rounded px-3 py-1 focus:ring-2 focus:ring-ring focus:border-ring dark:bg-background dark:text-foreground dark:border-border"
               >
                 <option value="featured">Featured</option>
                 <option value="price-low">Price: Low to High</option>
