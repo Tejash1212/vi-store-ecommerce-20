@@ -2,6 +2,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   onSnapshot,
   doc,
   updateDoc,
@@ -50,6 +51,13 @@ export async function getAllProducts() {
   const q = query(productsCollection, orderBy("createdAt", "desc"));
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => ({ id: d.id, ...(d.data() as Product) }));
+}
+
+export async function getProductById(id: string) {
+  const ref = doc(db, "products", id);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return null;
+  return { id: snap.id, ...(snap.data() as Product) };
 }
 
 export function onProductsSnapshot(callback: (products: Product[]) => void) {
