@@ -2,12 +2,14 @@ import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/context/AuthContext";
+import { useTheme } from "@/context/ThemeContext";
 import AdminModal from "@/components/AdminModal";
 import AddProductModal from "@/components/admin/AddProductModal";
 import ManageProductsModal from "@/components/admin/ManageProductsModal";
 import OrdersModal from "@/components/admin/OrdersModal";
 import AnalyticsModal from "@/components/admin/AnalyticsModal";
 import SettingsModal from "@/components/admin/SettingsModal";
+import { Moon, Sun } from "lucide-react";
 
 export default function Profile() {
   const { user, signOut } = useAuth();
