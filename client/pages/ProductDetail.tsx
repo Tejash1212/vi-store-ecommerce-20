@@ -254,7 +254,7 @@ export default function ProductDetail() {
                   <Star
                     key={i}
                     className={`h-5 w-5 ${
-                      i < Math.floor(product.rating)
+                      i < Math.floor((product.rating || 0))
                         ? "fill-yellow-400 text-yellow-400"
                         : "text-gray-300"
                     }`}
@@ -262,7 +262,7 @@ export default function ProductDetail() {
                 ))}
               </div>
               <span className="text-sm text-muted-foreground">
-                {product.rating} ({product.reviewCount} reviews)
+                {(product.rating ?? 0)} ({product.reviewCount ?? 0} reviews)
               </span>
             </div>
 
@@ -283,7 +283,7 @@ export default function ProductDetail() {
 
             {/* Stock Status */}
             <div className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full ${product.inStock ? "bg-green-500" : "bg-red-500"}`} />
+              <div className={`w-2 h-2 rounded-full ${(product.inStock ?? true) ? "bg-green-500" : "bg-red-500"}`} />
               <span className="text-sm">
                 {product.inStock ? "In Stock" : "Out of Stock"}
               </span>
@@ -294,7 +294,7 @@ export default function ProductDetail() {
               <div className="flex gap-3">
                 <Button
                   onClick={handleAddToCart}
-                  disabled={!product.inStock || loading}
+                  disabled={!(product.inStock ?? true) || loading}
                   className="flex-1"
                 >
                   {loading ? (
@@ -324,7 +324,7 @@ export default function ProductDetail() {
               <Button
                 variant="outline"
                 onClick={handleBuyNow}
-                disabled={!product.inStock || loading}
+                disabled={!(product.inStock ?? true) || loading}
                 className="w-full"
               >
                 Buy Now
