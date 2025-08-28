@@ -168,13 +168,27 @@ export default function Index() {
   // Subscribe to products collection in Firestore. Fall back to mockProducts while loading.
   useEffect(() => {
     let unsub: (() => void) | undefined;
+    let isActive = true; // Prevent state updates if component unmounted
+
     try {
       const { onProductsSnapshot } = require("@/lib/products");
-      unsub = onProductsSnapshot((items: any[]) => setProducts(items || []));
+      unsub = onProductsSnapshot((items: any[]) => {
+        if (isActive) {
+          setProducts(items || []);
+        }
+      });
     } catch (err) {
       console.warn("Could not subscribe to products snapshot:", err);
+      // Fallback to empty array if subscription fails
+      if (isActive) {
+        setProducts([]);
+      }
     }
-    return () => unsub && unsub();
+
+    return () => {
+      isActive = false;
+      if (unsub) unsub();
+    };
   }, []);
 
   const sourceProducts = products.length ? products : mockProducts;
