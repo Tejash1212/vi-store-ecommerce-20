@@ -28,24 +28,31 @@ export default function Header() {
 
   // When user types in header, update URL 'q' param (debounced) so Index updates live
   const debounceTimer = useRef<number | null>(null);
+  const isInitialMount = useRef(true);
+
   useEffect(() => {
-    // don't run on initial mount where location already sets searchQuery
+    // Skip initial mount to prevent unnecessary navigation
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     if (debounceTimer.current) window.clearTimeout(debounceTimer.current);
     debounceTimer.current = window.setTimeout(() => {
       const params = new URLSearchParams(location.search);
       const current = params.get("q") || "";
       if (searchQuery !== current) {
-        if (searchQuery) {
-          navigate(`/?q=${encodeURIComponent(searchQuery)}`, { replace: true });
+        if (searchQuery.trim()) {
+          navigate(`/?q=${encodeURIComponent(searchQuery.trim())}`, { replace: true });
         } else {
           navigate(`/`, { replace: true });
         }
       }
-    }, 300);
+    }, 500); // Increased debounce time for better performance
     return () => {
       if (debounceTimer.current) window.clearTimeout(debounceTimer.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   // Track scroll direction to hide header on scroll down and show on scroll up
