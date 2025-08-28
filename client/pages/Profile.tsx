@@ -43,11 +43,42 @@ export default function Profile() {
                     </p>
                   </div>
 
-                  <div className="flex gap-2">
-                    <Button onClick={signOut}>Sign Out</Button>
-                    <Button variant="outline" disabled>
-                      View Orders
-                    </Button>
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <h4 className="font-semibold">Appearance</h4>
+                      <div className="flex items-center justify-between p-3 rounded-lg border bg-card">
+                        <div className="flex items-center gap-3">
+                          {theme === "dark" ? (
+                            <Moon className="h-5 w-5 text-blue-500" />
+                          ) : (
+                            <Sun className="h-5 w-5 text-yellow-500" />
+                          )}
+                          <div>
+                            <p className="font-medium">
+                              {theme === "dark" ? "Dark Mode" : "Light Mode"}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              Switch between light and dark themes
+                            </p>
+                          </div>
+                        </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={toggleTheme}
+                          className="ml-4"
+                        >
+                          {theme === "dark" ? "Switch to Light" : "Switch to Dark"}
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Button onClick={signOut}>Sign Out</Button>
+                      <Button variant="outline" disabled>
+                        View Orders
+                      </Button>
+                    </div>
                   </div>
 
                   <div className="mt-6">
