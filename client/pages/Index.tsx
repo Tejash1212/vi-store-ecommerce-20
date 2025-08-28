@@ -174,12 +174,13 @@ export default function Index() {
       const { onProductsSnapshot } = require("@/lib/products");
       unsub = onProductsSnapshot((items: any[]) => {
         if (isActive) {
+          console.log("Products received from Firestore:", items?.length || 0, "items");
           setProducts(items || []);
         }
       });
     } catch (err) {
       console.warn("Could not subscribe to products snapshot:", err);
-      // Fallback to empty array if subscription fails
+      // Keep products empty array so mock products will be used
       if (isActive) {
         setProducts([]);
       }
@@ -191,7 +192,8 @@ export default function Index() {
     };
   }, []);
 
-  const sourceProducts = products.length ? products : mockProducts;
+  // Use Firestore products if available, otherwise fallback to mock products
+  const sourceProducts = products.length > 0 ? products : mockProducts;
 
   // Helper: base filter by category and search
   const baseFiltered = sourceProducts.filter(
