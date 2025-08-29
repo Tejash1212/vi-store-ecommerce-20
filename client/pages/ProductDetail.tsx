@@ -253,6 +253,12 @@ export default function ProductDetail() {
               src={product.image}
               alt={product.name}
               className="w-full h-full object-cover"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              onError={(e) => {
+                const t = e.currentTarget as HTMLImageElement;
+                if (t.src !== "/placeholder.svg") t.src = "/placeholder.svg";
+              }}
             />
           </div>
 
