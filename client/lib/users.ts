@@ -1,9 +1,13 @@
 import { doc, setDoc, serverTimestamp, increment } from "firebase/firestore";
 import { db } from "./firebase";
 
-export async function recordLogin(uid: string) {
+export async function recordLogin(uid: string, email?: string | null) {
   const ref = doc(db, "users", uid);
-  await setDoc(ref, { lastLoginAt: serverTimestamp() }, { merge: true });
+  await setDoc(
+    ref,
+    { lastLoginAt: serverTimestamp(), ...(email ? { email } : {}) },
+    { merge: true },
+  );
 }
 
 export async function incrementOrderCount(uid: string, by: number = 1) {
