@@ -163,6 +163,7 @@ export default function ProductDetail() {
     try {
       await addDoc(collection(db, "orders"), {
         userId: user?.uid || "guest",
+        userEmail: user?.email || null,
         items: [{ productId: product.id, name: product.name, price: product.price, qty: 1 }],
         total: product.price,
         status: "Pending",
