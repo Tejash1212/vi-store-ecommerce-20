@@ -215,9 +215,9 @@ export default function Chatbot() {
             </Button>
           </CardHeader>
           
-          <CardContent className="flex-1 h-0 flex flex-col p-3 gap-3">
+          <CardContent className="flex-1 h-0 min-h-0 flex flex-col p-3 gap-3">
             {/* Messages */}
-            <ScrollArea className="flex-1 h-0 overflow-y-auto" ref={scrollAreaRef}>
+            <ScrollArea className="flex-1 min-h-0" ref={scrollAreaRef}>
               <div className="space-y-3 pr-3">
                 {messages.map((message) => (
                   <div
