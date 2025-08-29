@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import CartModal from "./CartModal";
 import { useCart } from "@/context/CartContext";
-import { Search, User, Menu, X } from "lucide-react";
+import { Search, User, Menu, X } from "@/lib/icons";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

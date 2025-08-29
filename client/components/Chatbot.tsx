@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, Send, X, User } from "lucide-react";
+import { MessageCircle, Send, X, User } from "@/lib/icons";
 import ChatbotLogo, { ChatbotLogoGeometric } from "@/components/ChatbotLogo";
 
 interface Message {

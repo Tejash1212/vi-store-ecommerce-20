@@ -15,7 +15,7 @@ import {
   ShieldCheck,
   Timer,
   Tag,
-} from "lucide-react";
+} from "@/lib/icons";
 
 // Mock product data
 const mockProducts = [

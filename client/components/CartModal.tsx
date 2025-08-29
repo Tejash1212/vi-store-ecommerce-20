@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ShoppingCart, Plus, Minus, Trash2, ArrowRight } from "lucide-react";
+import { ShoppingCart, Plus, Minus, Trash2, ArrowRight } from "@/lib/icons";
 import { useCart } from "@/context/CartContext";
 
 interface CartModalProps {
