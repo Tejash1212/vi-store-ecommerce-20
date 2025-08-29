@@ -48,8 +48,9 @@ export async function deleteProduct(id: string) {
 }
 
 export async function getAllProducts() {
-  const q = query(productsCollection, orderBy("createdAt", "desc"));
-  const snapshot = await getDocs(q);
+  // Do NOT order by createdAt because some legacy docs may not have this field,
+  // and Firestore would exclude them. We'll sort on the client when needed.
+  const snapshot = await getDocs(productsCollection);
   return snapshot.docs.map((d) => ({ id: d.id, ...(d.data() as Product) }));
 }
 
@@ -61,8 +62,8 @@ export async function getProductById(id: string) {
 }
 
 export function onProductsSnapshot(callback: (products: Product[]) => void) {
-  const q = query(productsCollection, orderBy("createdAt", "desc"));
-  return onSnapshot(q, (snapshot) => {
+  // Subscribe to all products without ordering so docs missing createdAt are included
+  return onSnapshot(productsCollection, (snapshot) => {
     const products = snapshot.docs.map((d) => ({
       id: d.id,
       ...(d.data() as Product),
