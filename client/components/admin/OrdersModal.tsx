@@ -30,6 +30,9 @@ export default function OrdersModal() {
             <div>
               <div className="font-medium">Order #{o.id}</div>
               <div className="text-sm text-muted-foreground">
+                User: {o.userEmail || o.userId || "guest"}
+              </div>
+              <div className="text-sm text-muted-foreground">
                 Total: ${o.total || 0}
               </div>
               <div className="text-sm text-muted-foreground">
