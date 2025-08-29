@@ -100,7 +100,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hello! I'm your VI Store assistant. How can I help you today?",
+      text: "Hello! I'm VI Bot. How can I help you today?",
       isBot: true,
       timestamp: new Date()
     }
@@ -192,7 +192,7 @@ export default function Chatbot() {
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-lg flex items-center gap-2">
               <ChatbotLogo size="md" className="text-primary" />
-              VI Store Assistant
+              VI Bot
             </CardTitle>
             <Button
               variant="ghost"
