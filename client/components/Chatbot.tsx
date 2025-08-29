@@ -257,8 +257,17 @@ export default function Chatbot() {
               </div>
             </ScrollArea>
 
+            {/* Quick questions */}
+            <div className="flex flex-wrap gap-2">
+              {QUICK_QUESTIONS.map((q) => (
+                <Button key={q} variant="outline" size="sm" onClick={() => sendMessage(q)}>
+                  {q}
+                </Button>
+              ))}
+            </div>
+
             {/* Input */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-2">
               <Input
                 placeholder="Type your message..."
                 value={inputValue}
