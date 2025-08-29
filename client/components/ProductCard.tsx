@@ -54,6 +54,7 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
     try {
       await addDoc(collection(db, "orders"), {
         userId: user?.uid || "guest",
+        userEmail: user?.email || null,
         items: [
           {
             productId: product.id,
