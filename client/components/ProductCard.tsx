@@ -97,6 +97,12 @@ const ProductCard = React.memo(function ProductCard({
             src={product.image}
             alt={product.name}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              const t = e.currentTarget as HTMLImageElement;
+              if (t.src !== "/placeholder.svg") t.src = "/placeholder.svg";
+            }}
           />
 
           {/* Badges */}
