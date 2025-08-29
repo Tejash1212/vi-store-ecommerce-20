@@ -181,6 +181,8 @@ export default function Chatbot() {
           onClick={() => setIsOpen(true)}
           className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
           size="icon"
+          aria-label="VI Bot"
+          title="VI Bot"
         >
           <ChatbotLogoGeometric size="lg" className="text-primary-foreground" />
         </Button>
