@@ -146,7 +146,7 @@ export function ChatbotLogoGeometric({ size = "md", className = "" }: ChatbotLog
   };
 
   return (
-    <div className={`${sizeClasses[size]} ${className}`}>
+    <div className={`${sizeClasses[size]} ${className} flex items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 shadow-lg`}>
       <svg
         viewBox="0 0 32 32"
         fill="none"
