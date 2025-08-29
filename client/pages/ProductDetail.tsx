@@ -168,6 +168,14 @@ export default function ProductDetail() {
         status: "Pending",
         createdAt: serverTimestamp(),
       });
+      if (user?.uid) {
+        try {
+          const mod = await import("@/lib/users");
+          await mod.incrementOrderCount(user.uid);
+        } catch (e) {
+          console.warn("Failed to increment order count", e);
+        }
+      }
     } finally {
       setLoading(false);
     }
