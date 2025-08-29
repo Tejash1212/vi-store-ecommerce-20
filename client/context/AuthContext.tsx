@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (currentUser) {
         try {
           const mod = await import("@/lib/users");
-          await mod.recordLogin(currentUser.uid);
+          await mod.recordLogin(currentUser.uid, currentUser.email);
         } catch (e) {
           console.warn("Failed to record login", e);
         }
