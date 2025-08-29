@@ -95,6 +95,14 @@ const DEFAULT_RESPONSES = [
   "I'm your VI Store assistant! I can help with questions about products, shipping, returns, and more."
 ];
 
+const QUICK_QUESTIONS = [
+  "What are your shipping options?",
+  "What is your return policy?",
+  "Show trending products",
+  "What categories do you have?",
+  "How secure is payment?",
+];
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -138,12 +146,13 @@ export default function Chatbot() {
     return DEFAULT_RESPONSES[randomIndex];
   };
 
-  const sendMessage = async () => {
-    if (!inputValue.trim()) return;
+  const sendMessage = async (overrideText?: string) => {
+    const text = (overrideText ?? inputValue).trim();
+    if (!text) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      text: inputValue.trim(),
+      text,
       isBot: false,
       timestamp: new Date()
     };
