@@ -35,6 +35,15 @@ export default function OrdersModal() {
               <div className="text-sm text-muted-foreground">
                 Status: {o.status || "Pending"}
               </div>
+              {Array.isArray(o.items) && o.items.length > 0 && (
+                <div className="text-sm mt-1">
+                  <span className="font-medium">Items:</span>{" "}
+                  {o.items
+                    .map((it: any) => it?.name || it?.productName || it?.productId || it?.id)
+                    .filter(Boolean)
+                    .join(", ")}
+                </div>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <Button size="sm" onClick={() => handleUpdate(o.id, "Shipped")}>
