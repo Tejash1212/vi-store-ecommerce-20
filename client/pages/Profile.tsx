@@ -68,7 +68,9 @@ export default function Profile() {
                           onClick={toggleTheme}
                           className="ml-4"
                         >
-                          {theme === "dark" ? "Switch to Light" : "Switch to Dark"}
+                          {theme === "dark"
+                            ? "Switch to Light"
+                            : "Switch to Dark"}
                         </Button>
                       </div>
                     </div>

@@ -27,7 +27,9 @@ interface ProductCardProps {
   product: Product;
 }
 
-const ProductCard = React.memo(function ProductCard({ product }: ProductCardProps) {
+const ProductCard = React.memo(function ProductCard({
+  product,
+}: ProductCardProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { addToCart } = useCart();
   const { user } = useAuth();
@@ -79,7 +81,6 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
       setIsLoading(false);
     }
   };
-
 
   const discountPercentage = product.originalPrice
     ? Math.round(
@@ -152,7 +153,7 @@ const ProductCard = React.memo(function ProductCard({ product }: ProductCardProp
                   <Star
                     key={i}
                     className={`h-3 w-3 ${
-                      i < Math.floor((product.rating || 0))
+                      i < Math.floor(product.rating || 0)
                         ? "fill-yellow-400 text-yellow-400"
                         : "text-gray-300"
                     }`}

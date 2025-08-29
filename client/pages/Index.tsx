@@ -155,7 +155,9 @@ export default function Index() {
       const current = params.get("q") || "";
       if (searchQuery !== current) {
         if (searchQuery.trim())
-          navigate(`/?q=${encodeURIComponent(searchQuery.trim())}`, { replace: true });
+          navigate(`/?q=${encodeURIComponent(searchQuery.trim())}`, {
+            replace: true,
+          });
         else navigate(`/`, { replace: true });
       }
     }, 500); // Increased debounce time for better performance
@@ -237,7 +239,7 @@ export default function Index() {
     const c = p.createdAt;
     const d = c?.toDate ? c.toDate() : c instanceof Date ? c : null;
     return d ? now - d.getTime() <= thirtyDaysMs : false;
-    };
+  };
   const newProducts = sortProducts(
     baseFiltered.filter((p) => p.isNew || isRecent(p)),
     sortBy,

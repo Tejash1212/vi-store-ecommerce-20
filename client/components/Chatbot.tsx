@@ -15,84 +15,91 @@ interface Message {
 
 const CHATBOT_RULES = [
   {
-    patterns: ["hello", "hi", "hey", "good morning", "good afternoon", "good evening"],
+    patterns: [
+      "hello",
+      "hi",
+      "hey",
+      "good morning",
+      "good afternoon",
+      "good evening",
+    ],
     responses: [
       "Hello! Welcome to VI Store! How can I help you today?",
       "Hi there! I'm here to help you with any questions about our products and services.",
-      "Hey! Welcome to VI Store. What can I assist you with?"
-    ]
+      "Hey! Welcome to VI Store. What can I assist you with?",
+    ],
   },
   {
     patterns: ["shipping", "delivery", "ship", "when will"],
     responses: [
       "We offer free shipping on orders over $50! Standard delivery takes 3-5 business days.",
       "Shipping is free for orders above $50. You can expect your order in 3-5 business days.",
-      "We provide fast shipping! Orders over $50 get free delivery in 3-5 business days."
-    ]
+      "We provide fast shipping! Orders over $50 get free delivery in 3-5 business days.",
+    ],
   },
   {
     patterns: ["return", "refund", "exchange", "warranty"],
     responses: [
       "We have a 30-day return policy. You can return any item in its original condition.",
       "Returns are easy! We offer 30 days to return your purchase with a full refund.",
-      "You can return items within 30 days for a full refund. Just make sure they're in original condition."
-    ]
+      "You can return items within 30 days for a full refund. Just make sure they're in original condition.",
+    ],
   },
   {
     patterns: ["price", "cost", "expensive", "cheap", "discount", "sale"],
     responses: [
       "We offer competitive prices and regular sales! Check our trending section for the best deals.",
       "Our prices are great! We often have discounts on trending and new products.",
-      "You'll find excellent value here. Keep an eye on our featured products for special offers!"
-    ]
+      "You'll find excellent value here. Keep an eye on our featured products for special offers!",
+    ],
   },
   {
     patterns: ["product", "item", "what do you sell", "category", "categories"],
     responses: [
       "We sell electronics, fashion items, gaming gear, kitchen appliances, furniture, and more!",
       "Our store has electronics, wearables, photography gear, furniture, gaming accessories, and kitchen items.",
-      "We offer a wide range: Electronics, Fashion, Gaming, Kitchen, Furniture, and many other categories!"
-    ]
+      "We offer a wide range: Electronics, Fashion, Gaming, Kitchen, Furniture, and many other categories!",
+    ],
   },
   {
     patterns: ["payment", "pay", "credit card", "secure"],
     responses: [
       "We accept all major credit cards and ensure 100% secure checkout for your safety.",
       "Payment is secure! We accept credit cards and use encrypted checkout for your protection.",
-      "Your payment is safe with us. We support major credit cards with secure encryption."
-    ]
+      "Your payment is safe with us. We support major credit cards with secure encryption.",
+    ],
   },
   {
     patterns: ["support", "help", "contact", "customer service"],
     responses: [
       "We offer 24/7 customer support! I'm here to help, or you can contact our support team anytime.",
       "Need help? I'm here 24/7! Our customer service team is also always available to assist you.",
-      "We're always here to help! Available 24/7 for any questions or concerns you might have."
-    ]
+      "We're always here to help! Available 24/7 for any questions or concerns you might have.",
+    ],
   },
   {
     patterns: ["thank", "thanks", "appreciate"],
     responses: [
       "You're welcome! Happy to help. Is there anything else I can assist you with?",
       "My pleasure! Let me know if you need anything else.",
-      "You're very welcome! Feel free to ask if you have more questions."
-    ]
+      "You're very welcome! Feel free to ask if you have more questions.",
+    ],
   },
   {
     patterns: ["bye", "goodbye", "see you", "later"],
     responses: [
       "Goodbye! Thanks for visiting VI Store. Come back anytime!",
       "See you later! Happy shopping at VI Store!",
-      "Bye! Have a great day and happy shopping!"
-    ]
-  }
+      "Bye! Have a great day and happy shopping!",
+    ],
+  },
 ];
 
 const DEFAULT_RESPONSES = [
   "I'm here to help! You can ask me about shipping, returns, products, or anything else about VI Store.",
   "I didn't quite understand that. Try asking about our products, shipping, returns, or customer support!",
   "I'd love to help! Ask me about our store policies, product categories, or anything else you'd like to know.",
-  "I'm your VI Store assistant! I can help with questions about products, shipping, returns, and more."
+  "I'm your VI Store assistant! I can help with questions about products, shipping, returns, and more.",
 ];
 
 const QUICK_QUESTIONS = [
@@ -110,8 +117,8 @@ export default function Chatbot() {
       id: "1",
       text: "Hello! I'm VI Bot. How can I help you today?",
       isBot: true,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -119,7 +126,9 @@ export default function Chatbot() {
 
   const scrollToBottom = () => {
     if (scrollAreaRef.current) {
-      const scrollElement = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      const scrollElement = scrollAreaRef.current.querySelector(
+        "[data-radix-scroll-area-viewport]",
+      );
       if (scrollElement) {
         scrollElement.scrollTop = scrollElement.scrollHeight;
       }
@@ -132,7 +141,7 @@ export default function Chatbot() {
 
   const findResponse = (userMessage: string): string => {
     const lowercaseMessage = userMessage.toLowerCase();
-    
+
     for (const rule of CHATBOT_RULES) {
       for (const pattern of rule.patterns) {
         if (lowercaseMessage.includes(pattern)) {
@@ -154,25 +163,28 @@ export default function Chatbot() {
       id: Date.now().toString(),
       text,
       isBot: false,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setIsTyping(true);
 
     // Simulate typing delay
-    setTimeout(() => {
-      const botResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        text: findResponse(userMessage.text),
-        isBot: true,
-        timestamp: new Date()
-      };
+    setTimeout(
+      () => {
+        const botResponse: Message = {
+          id: (Date.now() + 1).toString(),
+          text: findResponse(userMessage.text),
+          isBot: true,
+          timestamp: new Date(),
+        };
 
-      setMessages(prev => [...prev, botResponse]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 1000); // 1-2 seconds delay
+        setMessages((prev) => [...prev, botResponse]);
+        setIsTyping(false);
+      },
+      1000 + Math.random() * 1000,
+    ); // 1-2 seconds delay
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -214,7 +226,7 @@ export default function Chatbot() {
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
-          
+
           <CardContent className="flex-1 h-0 min-h-0 flex flex-col p-3 gap-3 overscroll-contain">
             {/* Messages */}
             <ScrollArea className="flex-1 min-h-0" ref={scrollAreaRef}>
@@ -228,7 +240,10 @@ export default function Chatbot() {
                   >
                     {message.isBot && (
                       <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-sm">
-                        <ChatbotLogo size="sm" className="text-primary-foreground" />
+                        <ChatbotLogo
+                          size="sm"
+                          className="text-primary-foreground"
+                        />
                       </div>
                     )}
                     <div
@@ -252,13 +267,22 @@ export default function Chatbot() {
                 {isTyping && (
                   <div className="flex gap-2 justify-start">
                     <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-sm">
-                      <ChatbotLogo size="sm" className="text-primary-foreground" />
+                      <ChatbotLogo
+                        size="sm"
+                        className="text-primary-foreground"
+                      />
                     </div>
                     <div className="bg-muted text-foreground rounded-lg px-3 py-2 text-sm">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse"></div>
-                        <div className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                        <div className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                        <div
+                          className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse"
+                          style={{ animationDelay: "0.2s" }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse"
+                          style={{ animationDelay: "0.4s" }}
+                        ></div>
                       </div>
                     </div>
                   </div>
@@ -268,7 +292,12 @@ export default function Chatbot() {
                 <div className="mt-2">
                   <div className="flex flex-wrap gap-2">
                     {QUICK_QUESTIONS.map((q) => (
-                      <Button key={q} variant="outline" size="sm" onClick={() => sendMessage(q)}>
+                      <Button
+                        key={q}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => sendMessage(q)}
+                      >
                         {q}
                       </Button>
                     ))}
@@ -276,7 +305,6 @@ export default function Chatbot() {
                 </div>
               </div>
             </ScrollArea>
-
 
             {/* Input */}
             <div className="flex gap-2 mt-2">

@@ -23,7 +23,8 @@ const mockProducts = [
     category: "Electronics",
     isTrending: true,
     inStock: true,
-    description: "High-quality wireless Bluetooth headphones with active noise cancellation, premium audio drivers, and up to 30 hours of battery life. Perfect for music lovers and professionals.",
+    description:
+      "High-quality wireless Bluetooth headphones with active noise cancellation, premium audio drivers, and up to 30 hours of battery life. Perfect for music lovers and professionals.",
   },
   {
     id: "2",
@@ -37,7 +38,8 @@ const mockProducts = [
     category: "Wearables",
     isNew: true,
     inStock: true,
-    description: "Advanced fitness tracking with heart rate monitoring, GPS, sleep tracking, and water resistance. Compatible with iOS and Android devices.",
+    description:
+      "Advanced fitness tracking with heart rate monitoring, GPS, sleep tracking, and water resistance. Compatible with iOS and Android devices.",
   },
   {
     id: "3",
@@ -50,7 +52,8 @@ const mockProducts = [
     category: "Photography",
     isTrending: true,
     inStock: true,
-    description: "Professional-grade camera lens with exceptional optical quality, fast autofocus, and superior low-light performance. Ideal for portrait and landscape photography.",
+    description:
+      "Professional-grade camera lens with exceptional optical quality, fast autofocus, and superior low-light performance. Ideal for portrait and landscape photography.",
   },
   {
     id: "4",
@@ -63,7 +66,8 @@ const mockProducts = [
     reviewCount: 67,
     category: "Furniture",
     inStock: true,
-    description: "Ergonomically designed office chair with lumbar support, adjustable height, and breathable mesh material. Perfect for long working hours.",
+    description:
+      "Ergonomically designed office chair with lumbar support, adjustable height, and breathable mesh material. Perfect for long working hours.",
   },
   {
     id: "5",
@@ -77,7 +81,8 @@ const mockProducts = [
     category: "Gaming",
     isTrending: true,
     inStock: true,
-    description: "High-precision wireless gaming mouse with customizable RGB lighting, programmable buttons, and ultra-low latency for competitive gaming.",
+    description:
+      "High-precision wireless gaming mouse with customizable RGB lighting, programmable buttons, and ultra-low latency for competitive gaming.",
   },
   {
     id: "6",
@@ -90,7 +95,8 @@ const mockProducts = [
     category: "Kitchen",
     isNew: true,
     inStock: true,
-    description: "Premium coffee maker with multiple brewing modes, built-in grinder, and programmable timer. Creates barista-quality coffee at home.",
+    description:
+      "Premium coffee maker with multiple brewing modes, built-in grinder, and programmable timer. Creates barista-quality coffee at home.",
   },
   {
     id: "7",
@@ -103,7 +109,8 @@ const mockProducts = [
     reviewCount: 92,
     category: "Fashion",
     inStock: true,
-    description: "Stylish and functional designer backpack with multiple compartments, laptop sleeve, and water-resistant material. Perfect for daily commute.",
+    description:
+      "Stylish and functional designer backpack with multiple compartments, laptop sleeve, and water-resistant material. Perfect for daily commute.",
   },
   {
     id: "8",
@@ -117,7 +124,8 @@ const mockProducts = [
     category: "Audio",
     isTrending: true,
     inStock: true,
-    description: "Portable Bluetooth speaker with 360-degree sound, waterproof design, and 12-hour battery life. Perfect for outdoor adventures.",
+    description:
+      "Portable Bluetooth speaker with 360-degree sound, waterproof design, and 12-hour battery life. Perfect for outdoor adventures.",
   },
 ];
 
@@ -152,7 +160,15 @@ export default function ProductDetail() {
   const handleAddToCart = async () => {
     if (!product) return;
     setLoading(true);
-    addToCart({ id: product.id, name: product.name, price: product.price, image: product.image }, 1);
+    addToCart(
+      {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      },
+      1,
+    );
     await new Promise((r) => setTimeout(r, 200));
     setLoading(false);
   };
@@ -164,7 +180,14 @@ export default function ProductDetail() {
       await addDoc(collection(db, "orders"), {
         userId: user?.uid || "guest",
         userEmail: user?.email || null,
-        items: [{ productId: product.id, name: product.name, price: product.price, qty: 1 }],
+        items: [
+          {
+            productId: product.id,
+            name: product.name,
+            price: product.price,
+            qty: 1,
+          },
+        ],
         total: product.price,
         status: "Pending",
         createdAt: serverTimestamp(),
@@ -182,9 +205,10 @@ export default function ProductDetail() {
     }
   };
 
-
   const discountPercentage = product?.originalPrice
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    ? Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100,
+      )
     : 0;
 
   if (!product) {
@@ -194,7 +218,9 @@ export default function ProductDetail() {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
-            <p className="text-muted-foreground mb-6">The product you're looking for doesn't exist.</p>
+            <p className="text-muted-foreground mb-6">
+              The product you're looking for doesn't exist.
+            </p>
             <Link to="/">
               <Button>
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -212,7 +238,10 @@ export default function ProductDetail() {
       <Header />
       <div className="container mx-auto px-4 py-8">
         {/* Back Navigation */}
-        <Link to="/" className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6">
+        <Link
+          to="/"
+          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-6"
+        >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Products
         </Link>
@@ -235,7 +264,9 @@ export default function ProductDetail() {
                 <Badge className="bg-green-500 hover:bg-green-600">New</Badge>
               )}
               {product.isTrending && (
-                <Badge className="bg-orange-500 hover:bg-orange-600">Trending</Badge>
+                <Badge className="bg-orange-500 hover:bg-orange-600">
+                  Trending
+                </Badge>
               )}
               {discountPercentage > 0 && (
                 <Badge className="bg-red-500 hover:bg-red-600">
@@ -259,7 +290,7 @@ export default function ProductDetail() {
                   <Star
                     key={i}
                     className={`h-5 w-5 ${
-                      i < Math.floor((product.rating || 0))
+                      i < Math.floor(product.rating || 0)
                         ? "fill-yellow-400 text-yellow-400"
                         : "text-gray-300"
                     }`}
@@ -267,7 +298,7 @@ export default function ProductDetail() {
                 ))}
               </div>
               <span className="text-sm text-muted-foreground">
-                {(product.rating ?? 0)} ({product.reviewCount ?? 0} reviews)
+                {product.rating ?? 0} ({product.reviewCount ?? 0} reviews)
               </span>
             </div>
 
@@ -288,7 +319,9 @@ export default function ProductDetail() {
 
             {/* Stock Status */}
             <div className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full ${(product.inStock ?? true) ? "bg-green-500" : "bg-red-500"}`} />
+              <div
+                className={`w-2 h-2 rounded-full ${(product.inStock ?? true) ? "bg-green-500" : "bg-red-500"}`}
+              />
               <span className="text-sm">
                 {product.inStock ? "In Stock" : "Out of Stock"}
               </span>
