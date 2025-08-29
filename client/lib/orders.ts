@@ -12,6 +12,7 @@ import { db } from "./firebase";
 export type Order = {
   id?: string;
   userId?: string;
+  userEmail?: string;
   items?: any[];
   total?: number;
   status?: string;
