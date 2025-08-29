@@ -30,10 +30,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.debug("onAuthStateChanged fired", { currentUser });
       setUser(currentUser);
       setLoading(false);
+      if (currentUser) {
+        try {
+          const mod = await import("@/lib/users");
+          await mod.recordLogin(currentUser.uid);
+        } catch (e) {
+          console.warn("Failed to record login", e);
+        }
+      }
     });
     return () => unsubscribe();
   }, []);
